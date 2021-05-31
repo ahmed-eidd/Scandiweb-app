@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import classes from './CartIcon.module.css';
 
 export class CartIcon extends Component {
   render() {
     const style = {
       position: 'relative',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
     };
     const spanStyle = {
       position: 'absolute',
@@ -19,7 +23,7 @@ export class CartIcon extends Component {
       justifyContent: 'center',
       alignItems: 'center',
       top: '-6px',
-    left: '17px',
+      left: '17px',
     };
 
     return (
@@ -45,6 +49,7 @@ export class CartIcon extends Component {
             fill="#43464E"
           />
         </svg>
+        <div className={classes.MiniCart}></div>
       </div>
     );
   }

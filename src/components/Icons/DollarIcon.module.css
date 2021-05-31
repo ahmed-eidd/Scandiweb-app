@@ -1,0 +1,29 @@
+.Container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.IconContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Curr {
+  position: absolute;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 11.4rem;
+  height: 16.9rem;
+  box-shadow: var(--shadow);
+}
+
+.Curr div{
+  cursor: pointer;
+}
