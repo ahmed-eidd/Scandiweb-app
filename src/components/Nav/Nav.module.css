@@ -1,0 +1,16 @@
+.Nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Icons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Icons div {
+  margin: 0 .5rem;
+  padding: 0.5rem .5rem;
+}
