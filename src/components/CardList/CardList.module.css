@@ -1,0 +1,8 @@
+.CardList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 46rem);
+  grid-gap: 2rem;
+  justify-content: center;
+  justify-items: center;
+}

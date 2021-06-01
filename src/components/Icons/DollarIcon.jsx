@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import classes from './DollarIcon.module.css';
+import { connect } from 'react-redux';
+import { currOpen } from '../../store/modals/slice';
+import Modal from '../Modal/Modal';
+import Backdrop from '../Backdrop/Backdrop';
 
 export class DollarIcon extends Component {
   render() {
-    const { open, onClick } = this.props;
+    const { open, onClick, currHandler } = this.props;
     return (
+      <>
       <div className={classes.Container}>
-        <div className={classes.IconContainer} onClick={onClick}>
+        <div className={classes.IconContainer} onClick={currHandler}>
           <svg
             style={{
               cursor: 'pointer',
+             
             }}
             width="32"
             height="30"
@@ -42,15 +48,30 @@ export class DollarIcon extends Component {
           </svg>
         </div>
         {open && (
-          <div className={classes.Curr}>
+          // <div className={classes.Curr}>
+          //   <div>$ USD</div>
+          //   <div>€ EUR</div>
+          //   <div>¥ JPY</div>
+          // </div>
+          <Modal className={classes.curr} top="100%">
             <div>$ USD</div>
             <div>€ EUR</div>
             <div>¥ JPY</div>
-          </div>
+          </Modal>
         )}
       </div>
+      <Backdrop open={open} />
+      </>
+
     );
   }
 }
 
-export default DollarIcon;
+const mapStateToProps = (state) => ({
+  open: state.modals.currOpen,
+});
+const mapDispatchToProps = {
+  currHandler: currOpen,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DollarIcon);

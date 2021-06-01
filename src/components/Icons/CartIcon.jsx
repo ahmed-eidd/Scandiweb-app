@@ -9,6 +9,8 @@ export class CartIcon extends Component {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
+      margin: ' 0 .5rem',
+      padding: '0.5rem .5rem',
     };
     const spanStyle = {
       position: 'absolute',
@@ -30,6 +32,9 @@ export class CartIcon extends Component {
       <div style={style}>
         <span style={spanStyle}>1</span>
         <svg
+          // style={{
+          //
+          // }}
           width={20}
           height={20}
           viewBox="0 0 20 20"

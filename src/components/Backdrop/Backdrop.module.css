@@ -1,0 +1,11 @@
+.Backdrop {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 8rem);
+  background: rgba(57, 55, 72, 0.22);
+
+  transition: opacity 0.4s ease-in-out 0s;
+}

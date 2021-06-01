@@ -3,6 +3,8 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin: 0 0.5rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .IconContainer {
@@ -12,7 +14,7 @@
   cursor: pointer;
 }
 
-.Curr {
+/* .Curr {
   position: absolute;
   top: 100%;
   display: flex;
@@ -22,8 +24,9 @@
   width: 11.4rem;
   height: 16.9rem;
   box-shadow: var(--shadow);
-}
+} */
 
-.Curr div{
-  cursor: pointer;
+.curr div {
+  width: 5rem;
+  margin: 1rem 2rem;
 }

@@ -22,7 +22,7 @@ export class Nav extends Component {
 
         <Logo />
         <div className={classes.Icons}>
-          <DollarIcon open={currOpen} onClick={this.onCurrHandler} />
+          <DollarIcon />
           <CartIcon />
         </div>
       </div>

@@ -1,0 +1,24 @@
+.Card {
+  /* background-color: var(--color-light); */
+  background-color:violet;
+  position: relative;
+  width: 38.6rem;
+  height: 44.4rem;
+  box-shadow: var(--shadow);
+}
+
+.CardImg {
+
+}
+
+.CardTitle {
+
+}
+
+.CardPrice {
+
+}
+
+.CardCartBtn {
+  position: absolute;
+}
