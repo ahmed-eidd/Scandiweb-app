@@ -8,11 +8,11 @@ export const modalSlice = createSlice({
 
   },
   reducers: {
-    currOpen: (state) => {
+    currOpenAction: (state) => {
       state.currOpen = !state.currOpen;
       state.cartOpen =  false
     },
-    cartOpen: (state) => {
+    cartOpenAction: (state) => {
       state.currOpen = false;
       state.cartOpen =  !state.cartOpen;
     },
@@ -20,7 +20,7 @@ export const modalSlice = createSlice({
   },
 });
 
-export const { currOpen , cartOpen } = modalSlice.actions
+export const { currOpenAction , cartOpenAction } = modalSlice.actions
 
 export default modalSlice.reducer
 

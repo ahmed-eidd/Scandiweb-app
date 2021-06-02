@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import CartIcon from '../../../Icons/CartIcon';
+import MiniCart from '../../../MiniCart/MiniCart';
 import classes from './NavCart.module.css';
+import { connect } from 'react-redux';
+import { cartOpenAction } from '../../../../store/modals/slice';
+import Backdrop from '../../../Backdrop/Backdrop';
 
 export class NavCart extends Component {
   render() {
+    const { open, openAction } = this.props;
+
     const style = {
       position: 'relative',
-      cursor: 'pointer',
+ 
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -14,6 +20,7 @@ export class NavCart extends Component {
       padding: '0.5rem .5rem',
     };
     const spanStyle = {
+      cursor: 'pointer',
       position: 'absolute',
       color: 'var(--color-light)',
       backgroundColor: 'var(--color-dark)',
@@ -30,13 +37,23 @@ export class NavCart extends Component {
     };
 
     return (
-      <div style={style}>
-        <span style={spanStyle}>1</span>
-        <CartIcon />
-        <div className={classes.MiniCart}></div>
-      </div>
+      <>
+        <div style={style}>
+            <span style={spanStyle} onClick={openAction}>1</span>
+            <CartIcon onClick={openAction} />
+          <MiniCart open={open} />
+          <Backdrop open={open} />
+        </div>
+      </>
     );
   }
 }
 
-export default NavCart;
+const mapStateToProps = (state) => ({
+  open: state.modals.cartOpen,
+});
+
+const mapDispatchToProps = {
+  openAction: cartOpenAction,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(NavCart);

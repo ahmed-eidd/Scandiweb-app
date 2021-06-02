@@ -27,6 +27,12 @@
   cursor: pointer;
 }
 
+.SquareMini {
+
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
 .SquareFull {
   background-color: var(--color-dark);
   color: var(--color-light);

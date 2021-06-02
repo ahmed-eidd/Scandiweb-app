@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classes from './NavCurr.module.css';
 import { connect } from 'react-redux';
-import { currOpen } from '../../../../store/modals/slice';
+import { currOpenAction } from '../../../../store/modals/slice';
 import Modal from '../../../Modal/Modal';
 import Backdrop from '../../../Backdrop/Backdrop';
 import DollarIcon from '../../../Icons/DollarIcon';
@@ -17,13 +17,12 @@ export class NavCurr extends Component {
             <DollarIcon />
             <ArrowIcon open={open} />
           </div>
-          {open && (
-            <Modal className={classes.curr} top="100%">
-              <div>$ USD</div>
-              <div>€ EUR</div>
-              <div>¥ JPY</div>
-            </Modal>
-          )}
+
+          <Modal open={open} className={classes.curr} top="100%">
+            <div>$ USD</div>
+            <div>€ EUR</div>
+            <div>¥ JPY</div>
+          </Modal>
         </div>
         <Backdrop open={open} />
       </>
@@ -35,7 +34,7 @@ const mapStateToProps = (state) => ({
   open: state.modals.currOpen,
 });
 const mapDispatchToProps = {
-  currHandler: currOpen,
+  currHandler: currOpenAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavCurr);

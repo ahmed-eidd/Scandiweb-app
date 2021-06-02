@@ -14,23 +14,26 @@ export class Button extends Component {
       style,
       className,
       sqFull,
-      sqEmpty
+      sqEmpty,
+      sqMini
     } = this.props;
     // css classes
     const btnClass =
       variant === 'outline'
         ? [classes.btn, classes.outline, className].join(' ')
         : [classes.btn, classes.filled, className].join(' ');
-      const SquareBtnClasses = () => {
-        let mainClass = classes.Square
-        if (sqFull) {
-          return [mainClass, classes.SquareFull].join(' ')
-        } else if (sqEmpty) {
-          return [mainClass, classes.SquareEmpty].join(' ')
-        } else {
-          return mainClass
-        }
+    const SquareBtnClasses = () => {
+      let mainClass = sqMini
+        ? [classes.Square, classes.SquareMini].join(' ')
+        : classes.Square;
+      if (sqFull) {
+        return [mainClass, classes.SquareFull].join(' ');
+      } else if (sqEmpty) {
+        return [mainClass, classes.SquareEmpty].join(' ');
+      } else {
+        return mainClass;
       }
+    };
 
     return (
       <>
@@ -65,11 +68,9 @@ export class Button extends Component {
 
         {/* if Button is a Square */}
 
-        {
-          type === 'square' && (
-            <div className={SquareBtnClasses()}>{children}</div>
-          )
-        }
+        {type === 'square' && (
+          <div className={SquareBtnClasses()}>{children}</div>
+        )}
       </>
     );
   }
