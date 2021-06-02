@@ -2,8 +2,10 @@
   --color-primary: #5ece7b;
   --color-dark: #1d1f22;
   --color-light: #ffffff;
+  --color-grey: #A6A6A6;
   --font-primary: 'Raleway', sans-serif;
-  --shadow:  0px 2px 5px #0000001f;
+  --shadow: 0px 2px 5px #0000001f;
+  --shadow-lighter: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
 
 html,

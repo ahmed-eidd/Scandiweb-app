@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import CartIcon from '../Icons/CartIcon';
-import DollarIcon from '../Icons/DollarIcon';
+import Button from '../Button/Button';
+import CartIcon from './NavIcons/NavCart/NavCart';
+import DollarIcon from './NavIcons/NavCurr/NavCurr';
 import Logo from '../Logo/Logo';
 import classes from './Nav.module.css';
 import NavItems from './NavItems/NavItems';
