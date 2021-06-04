@@ -8,7 +8,7 @@ import Backdrop from '../../../Backdrop/Backdrop';
 
 export class NavCart extends Component {
   render() {
-    const { open, openAction } = this.props;
+    const { open, openAction,cart, cartCount } = this.props;
 
     const style = {
       position: 'relative',
@@ -39,7 +39,7 @@ export class NavCart extends Component {
     return (
       <>
         <div style={style}>
-            <span style={spanStyle} onClick={openAction}>1</span>
+            <span style={spanStyle} onClick={openAction}>{cartCount}</span>
             <CartIcon onClick={openAction} />
           <MiniCart open={open} />
           <Backdrop open={open} />
@@ -51,6 +51,8 @@ export class NavCart extends Component {
 
 const mapStateToProps = (state) => ({
   open: state.modals.cartOpen,
+  cart: state.cart.cart,
+  cartCount: state.cart.count,
 });
 
 const mapDispatchToProps = {

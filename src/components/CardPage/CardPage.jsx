@@ -4,6 +4,8 @@ import classes from './CardPage.module.css';
 import Img from '../../test.png';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
+import { addToCart, addMore } from '../../store/cart/slice';
+import { isInCart } from '../../utilities/isInCart';
 
 export class CardPage extends Component {
   state = {
@@ -17,9 +19,9 @@ export class CardPage extends Component {
   };
 
   render() {
-    const { product, currency } = this.props;
+    const { product, currency, addItemToCart, cart, addMore } = this.props;
     const { currentImg } = this.state;
- 
+
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
@@ -46,21 +48,31 @@ export class CardPage extends Component {
         <div className={classes.Description}>
           <h2 className={classes.Title}>{product.name}</h2>
           <div className={classes.Attributes}>
-            {product.attributes.map((attribute) => (
+            {product.attributes.map((attribute, i) => (
               <>
-              <p className={classes.Attribute}>{attribute.name}</p>
-              <div className={classes.AttributeBtns}>
-                {
-                  attribute.items.map((item) => {
-                    let btn
+                <p className={classes.Attribute} key={i}>
+                  {attribute.name}
+                </p>
+                <div className={classes.AttributeBtns}>
+                  {attribute.items.map((item, i) => {
+                    let btn;
                     if (attribute.type === 'swatch') {
-                      return btn = <Button type="square" style={{backgroundColor: item.value}} />
+                      return (btn = (
+                        <Button
+                          key={i}
+                          type="square"
+                          style={{ backgroundColor: item.value }}
+                        />
+                      ));
                     }
-                    return <Button type="square"> {item.value} </Button>
-                  }
-                  )
-                }
-              </div>
+                    return (
+                      <Button type="square" key={i}>
+                        {' '}
+                        {item.value}{' '}
+                      </Button>
+                    );
+                  })}
+                </div>
               </>
             ))}
           </div>
@@ -69,19 +81,27 @@ export class CardPage extends Component {
           <p className={classes.Number}>
             {getCurrentPrice(product.prices, currency) + ' ' + currency}{' '}
           </p>
-          <Button
-            style={{
-              width: '100%',
-            }}
+          {isInCart(cart, product) ? (
+            <Button style={{ width: '100%' }} onClick={() => addMore(product)}>Add More</Button>
+          ) : (
+            <Button
+              onClick={() => addItemToCart(product)}
+              style={{
+                width: '100%',
+              }}
+            >
+              ADD TO CART
+            </Button>
+          )}
+          <div
+            className={classes.Text}
+            dangerouslySetInnerHTML={{ __html: product.description }}
           >
-            ADD TO CART
-          </Button>
-          <p className={classes.Text}>
             {/* Find stunning women's cocktail dresses and party dresses. Stand out
             in lace and metallic cocktail dresses and party dresses from all
             your favorite brands. */}
-            {product.description}
-          </p>
+            {/* {product.description.replace(/['"]+/g, '')} */}
+          </div>
         </div>
       </div>
     );
@@ -90,6 +110,12 @@ export class CardPage extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency.currency,
+  cart: state.cart.cart,
 });
 
-export default connect(mapStateToProps)(CardPage);
+const mapDispatchToProps = {
+  addItemToCart: addToCart,
+  addMore: addMore,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardPage);

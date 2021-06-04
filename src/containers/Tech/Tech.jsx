@@ -4,7 +4,7 @@ import CardList from '../../components/CardList/CardList';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 
-export class Home extends Component {
+export class Tech extends Component {
   render() {
     const { products, currency } = this.props;
     return (
@@ -12,7 +12,6 @@ export class Home extends Component {
         {console.log(products)}
         {products.map((product) => (
           <Card
-            product={product}
             key={product.name}
             id={product.name}
             title={product.name}
@@ -30,4 +29,4 @@ const mapStateToProps = (state) => ({
   currency: state.currency?.currency,
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(mapStateToProps)(Tech);

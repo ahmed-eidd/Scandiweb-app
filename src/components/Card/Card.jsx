@@ -3,11 +3,12 @@ import classes from './Card.module.css';
 // import Img from '../../test.png';
 import CartIcon from '../Icons/CartIcon';
 import { Link } from 'react-router-dom';
+import {isInCart} from '../../utilities/isInCart'
 import { connect } from 'react-redux';
 
 export class Card extends Component {
   render() {
-    const { img, title, price, id, curr } = this.props;
+    const { img, title, price, id, curr,cart,product } = this.props;
     return (
       <div className={classes.Card}>
         <Link
@@ -28,6 +29,7 @@ export class Card extends Component {
           </p>
         </div>
         <div className={classes.CardBtn}>
+          {console.log(isInCart(cart,product))}
           <CartIcon color="var(--color-light)" />
         </div>
       </div>
@@ -35,4 +37,8 @@ export class Card extends Component {
   }
 }
 
-export default Card;
+const mapStateProps = (state) => ({
+  cart: state.cart.cart
+}) 
+
+export default connect(mapStateProps)(Card);

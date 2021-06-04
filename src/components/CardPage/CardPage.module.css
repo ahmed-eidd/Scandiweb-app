@@ -103,3 +103,9 @@
   font-size: 1.6rem;
   margin-top: 4rem;
 }
+
+.Text h1{
+  margin: 1.5rem 0;
+  line-height: 1.5;
+  font-size: 2rem;
+}
