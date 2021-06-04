@@ -5,6 +5,9 @@ import DollarIcon from './NavIcons/NavCurr/NavCurr';
 import Logo from '../Logo/Logo';
 import classes from './Nav.module.css';
 import NavItems from './NavItems/NavItems';
+import { Query } from '@apollo/client/react/components';
+import {GET_CURRENCIES} from '../../graphql/Queries'
+
 export class Nav extends Component {
   state = {
     currOpen: false,
@@ -18,15 +21,18 @@ export class Nav extends Component {
   render() {
     const { currOpen, cartOpen } = this.state;
     return (
-      <div className={classes.Nav}>
-        <NavItems />
-
-        <Logo />
-        <div className={classes.Icons}>
-          <DollarIcon />
-          <CartIcon />
-        </div>
-      </div>
+      <Query query={GET_CURRENCIES}>
+        {({data, loading}) => (
+          <div className={classes.Nav}>
+            <NavItems />
+            <Logo />
+            <div className={classes.Icons}>
+              <DollarIcon currencies={data?.currencies} />
+              <CartIcon />
+            </div>
+          </div>
+        )}
+      </Query>
     );
   }
 }

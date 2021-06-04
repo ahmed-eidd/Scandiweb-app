@@ -1,12 +1,15 @@
-import React, { Component } from 'react'
-import CardPage from '../../components/CardPage/CardPage'
+import React, { Component } from 'react';
+import CardPage from '../../components/CardPage/CardPage';
+import { withRouter } from 'react-router-dom';
 
 export class ProductPage extends Component {
   render() {
-    return (
-      <CardPage />
-    )
+    const { products,location, history,match } = this.props;
+    const {id} = match.params
+    const product = products.find(product => product.name === id)
+    console.log(product) 
+    return <CardPage product={product} />;
   }
 }
 
-export default ProductPage
+export default withRouter(ProductPage);

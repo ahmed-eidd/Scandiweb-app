@@ -2,56 +2,85 @@ import React, { Component } from 'react';
 import Button from '../Button/Button';
 import classes from './CardPage.module.css';
 import Img from '../../test.png';
+import { connect } from 'react-redux';
+import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 
 export class CardPage extends Component {
   state = {
-    mainImgIndex: 0,
-    Imgs: []
-  }
+    currentImg: null,
+  };
+
+  selectImg = (img) => {
+    this.setState({
+      currentImg: img,
+    });
+  };
+
   render() {
+    const { product, currency } = this.props;
+    const { currentImg } = this.state;
+ 
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
           <div className={classes.MiniGallery}>
-            <div className={classes.MiniImg}>
-              <img src={Img} alt="mini" />
-            </div>
-            <div className={classes.MiniImg}>
-              <img src={Img} alt="mini" className={classes.MiniImg} />
-            </div>
-            <div className={classes.MiniImg}>
-              <img src={Img} alt="mini" />
-            </div>
+            {product.gallery.map((el, i) => (
+              <div
+                className={classes.MiniImg}
+                onClick={() => this.selectImg(el)}
+                key={i}
+              >
+                <img src={el} alt="mini Product Image" />
+              </div>
+            ))}
           </div>
           <div className={classes.MainImg}>
-            <img src={Img} alt="main" />
+            <img
+              src={!currentImg ? product.gallery[0] : currentImg}
+              alt="main"
+            />
           </div>
         </div>
 
         {/* Description */}
         <div className={classes.Description}>
-          <h2 className={classes.Title}>
-            <span>Apollo</span> Running Short
-          </h2>
-          <div className={classes.Sizes}>
-            <p className={classes.Size}>SIZE:</p>
-            <div className={classes.SizeBtns}>
-              <Button type="square" sqEmpty>XS</Button>
-              <Button type="square" sqFull>S</Button>
-              <Button type="square">M</Button>
-              <Button type="square">L</Button>
-            </div>
+          <h2 className={classes.Title}>{product.name}</h2>
+          <div className={classes.Attributes}>
+            {product.attributes.map((attribute) => (
+              <>
+              <p className={classes.Attribute}>{attribute.name}</p>
+              <div className={classes.AttributeBtns}>
+                {
+                  attribute.items.map((item) => {
+                    let btn
+                    if (attribute.type === 'swatch') {
+                      return btn = <Button type="square" style={{backgroundColor: item.value}} />
+                    }
+                    return <Button type="square"> {item.value} </Button>
+                  }
+                  )
+                }
+              </div>
+              </>
+            ))}
           </div>
 
           <p className={classes.Price}>Price:</p>
-          <p className={classes.Number}>$50.00</p>
-          <Button style={{
-            width: '100%'
-          }}>ADD TO CART</Button>
+          <p className={classes.Number}>
+            {getCurrentPrice(product.prices, currency) + ' ' + currency}{' '}
+          </p>
+          <Button
+            style={{
+              width: '100%',
+            }}
+          >
+            ADD TO CART
+          </Button>
           <p className={classes.Text}>
-            Find stunning women's cocktail dresses and party dresses. Stand out
+            {/* Find stunning women's cocktail dresses and party dresses. Stand out
             in lace and metallic cocktail dresses and party dresses from all
-            your favorite brands.
+            your favorite brands. */}
+            {product.description}
           </p>
         </div>
       </div>
@@ -59,4 +88,8 @@ export class CardPage extends Component {
   }
 }
 
-export default CardPage;
+const mapStateToProps = (state) => ({
+  currency: state.currency.currency,
+});
+
+export default connect(mapStateToProps)(CardPage);

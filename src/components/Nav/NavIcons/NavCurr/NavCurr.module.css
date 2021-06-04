@@ -26,7 +26,9 @@
   box-shadow: var(--shadow);
 } */
 
-.curr div {
-  width: 5rem;
-  margin: 1rem 2rem;
+.currItem {
+  cursor: pointer;
+
+  margin: .5rem 0;
+  padding: 1rem 2rem;
 }

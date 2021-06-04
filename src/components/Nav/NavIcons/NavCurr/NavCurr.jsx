@@ -6,10 +6,17 @@ import Modal from '../../../Modal/Modal';
 import Backdrop from '../../../Backdrop/Backdrop';
 import DollarIcon from '../../../Icons/DollarIcon';
 import ArrowIcon from '../../../Icons/ArrowIcon';
+import {changeCurrency} from '../../../../store/currency/slice'
 
 export class NavCurr extends Component {
+
+  onCurrHandler = (curr) => {
+    this.props.currChange(curr)
+    this.props.currHandler(); 
+  }
+
   render() {
-    const { open, onClick, currHandler } = this.props;
+    const { open, onClick, currHandler, currencies = [], currChange } = this.props;
     return (
       <>
         <div className={classes.Container}>
@@ -19,9 +26,9 @@ export class NavCurr extends Component {
           </div>
 
           <Modal open={open} className={classes.curr} top="100%">
-            <div>$ USD</div>
-            <div>€ EUR</div>
-            <div>¥ JPY</div>
+            {currencies?.map((el) => (
+              <div className={classes.currItem} onClick={() => this.onCurrHandler(el)} key={el}>{el}</div>
+            ))}
           </Modal>
         </div>
         <Backdrop open={open} />
@@ -35,6 +42,7 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   currHandler: currOpenAction,
+  currChange: changeCurrency
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavCurr);

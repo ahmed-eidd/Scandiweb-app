@@ -1,8 +1,11 @@
 import { combineReducers} from 'redux'
-import reposReducer from '../store/modals/slice'
+import modalsReducer from '../store/modals/slice'
+import currencyReducer from '../store/currency/slice'
+
 
 const rootReducer = combineReducers({
-  modals: reposReducer
+  modals: modalsReducer,
+  currency: currencyReducer 
 })
 
 export default rootReducer

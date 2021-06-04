@@ -7,14 +7,14 @@ export class NavItems extends Component {
     return (
       <ul className={classes.NavItems}>
         <NavItem to='/'>
-          Women
+          All
         </NavItem>
 
-        <NavItem to='/men'>
-          Men
+        <NavItem to='/tech'>
+          Tech
         </NavItem>
-        <NavItem to='/kids'>
-          Kids
+        <NavItem to='/clothes'>
+          Clothes
         </NavItem>
       </ul>
     )

@@ -69,7 +69,7 @@ export class Button extends Component {
         {/* if Button is a Square */}
 
         {type === 'square' && (
-          <div className={SquareBtnClasses()}>{children}</div>
+          <div style={style}  className={SquareBtnClasses()}>{children}</div>
         )}
       </>
     );

@@ -1,6 +1,6 @@
 .CardPage {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 
@@ -8,12 +8,12 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  margin-right:8rem ;
+  margin-right: 8rem;
 }
 
 .MiniGallery {
- display: flex;
- flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .MiniImg {
@@ -26,6 +26,7 @@
 .MiniImg img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .MainImg {
@@ -48,7 +49,6 @@
 .Title {
   font-size: 3rem;
   font-weight: 400;
-;
   display: inline-block;
 }
 
@@ -57,38 +57,45 @@
   display: block;
 }
 
-
-.Sizes {
+.Attributes {
   width: 100%;
-;
 }
 
-.SizeBtns {
+.AttributeBtns {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: 1rem;
+  margin: 2rem 0;
 }
 
-.Size, .Price , .Number {
+.AttributeBtns div {
+  margin-right: 1rem ;
+  margin-bottom: 1rem;
+}
+
+.Attribute,
+.Price,
+.Number {
   font-weight: 700;
   text-transform: uppercase;
 }
 
-.Size, .Price {
+.Attribute,
+.Price {
   font-size: 1.8rem;
 }
 
-.Title, .Sizes, .Price, .Number {
+.Title,
+.Attributes,
+.Price,
+.Number {
   margin-bottom: 5rem;
 }
 
 .Number {
   font-size: 2.4rem;
 }
-
-
-
 
 .Text {
   line-height: 159.96%;
