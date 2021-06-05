@@ -5,6 +5,7 @@ export const actions = {
   ADD_ITEM: 'ADD_ITEM',
   DETELE_ITEM: 'DELETE_ITEM',
   ADD_MORE_ITEM: 'ADD_MORE_ITEM',
+  ADD_LESS_ITEM: 'ADD_LESS_ITEM',
 };
 
 const initialState = {
@@ -18,16 +19,37 @@ const cartRecuder = (state = initialState, action) => {
     case actions.ADD_ITEM: {
       return {
         ...state,
-        cart: [...state.cart, {...payload, count: 1}],
+        cart: [...state.cart, { ...payload, count: 1 }],
         count: state.count + 1,
       };
     }
     case actions.ADD_MORE_ITEM: {
-      state.cart[state.cart.findIndex(item => item.name === action.payload.name)].count++
+      state.cart[
+        state.cart.findIndex((item) => item.name === action.payload.name)
+      ].count++;
 
       return {
         ...state,
-        cart: [...state.cart]
+        cart: [...state.cart],
+      };
+    }
+    case actions.ADD_LESS_ITEM: {
+
+      state.cart[
+        state.cart.findIndex((item) => item.name === action.payload.name)
+      ].count--;
+
+      return {
+        ...state,
+        cart: [...state.cart],
+      };
+    }
+
+    case actions.DETELE_ITEM: {
+      return {
+        ...state,
+        cart: state.cart.filter((el) => el.name !== payload.name),
+        count: state.count < 0 ? state.count - 1 : 0
       }
     }
     default:

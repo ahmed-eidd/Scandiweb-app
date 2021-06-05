@@ -33,13 +33,13 @@
   margin-top: -1.5rem;
 }
 
-.Sizes {
+.Attributes {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.Sizes div {
+.Attributes div {
   margin-right: 1rem;
 }
 
@@ -72,6 +72,7 @@
 .ItemImg img {
   height: 100%;
   width: 100%;
+  object-fit: contain;
 }
 
 .Total {

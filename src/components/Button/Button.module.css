@@ -27,6 +27,10 @@
   cursor: pointer;
 }
 
+.SquareActive {
+  border: 2px solid var(--color-primary);
+}
+
 .SquareMini {
 
   width: 2.4rem;

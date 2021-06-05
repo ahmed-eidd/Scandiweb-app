@@ -12,6 +12,7 @@ export class Clothes extends Component {
         {console.log(this.props)}
         {products.map((product) => (
           <Card
+          product={product}
             key={product.name}
             id={product.name}
             title={product.name}

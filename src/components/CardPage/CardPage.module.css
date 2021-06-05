@@ -70,7 +70,7 @@
 }
 
 .AttributeBtns div {
-  margin-right: 1rem ;
+  margin-right: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -104,8 +104,14 @@
   margin-top: 4rem;
 }
 
-.Text h1{
+.Text h1 {
   margin: 1.5rem 0;
   line-height: 1.5;
   font-size: 2rem;
+}
+
+.Warning {
+  font-weight: bold;
+  margin: 2rem 0;
+  color: red;
 }

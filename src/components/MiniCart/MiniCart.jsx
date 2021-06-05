@@ -2,97 +2,101 @@ import React, { Component } from 'react';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import classes from './MiniCart.module.css';
-import Img from '../../test.png';
+import { connect } from 'react-redux';
+import { getCurrentPrice } from '../../utilities/getCurrentPrice';
+import { addMoreItem, addLessItem, deleteItem } from '../../store/cart/actions';
+import { openCart } from '../../store/modals/actions';
 
 export class MiniCart extends Component {
+
+  calEachItem = (item) => {
+    const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count
+    return itemCount * getCurrentPrice(item.prices, this.props.currency)
+  }
+
+  calTotal = (cart) => {
+    let eachItemPrice = []
+    cart.map((el) => {
+      let price = getCurrentPrice(el.prices, this.props.currency)
+      eachItemPrice.push(price * el.count)
+    })
+
+    const totalPrice = eachItemPrice.reduce((curr, acc) => curr + acc, 0) 
+    return totalPrice
+  }
+
   render() {
-    const { open } = this.props;
+    const {
+      open,
+      cart,
+      count,
+      currency,
+      increaseItem,
+      descreaseItem,
+      removeItem,
+      cartModalHandler
+    } = this.props;
     return (
       <Modal open={open} top="150%" className={classes.MiniCart}>
         <h2>
-          My Bag, <span>2 items</span>
+          My Bag, <span>{count} items</span>
         </h2>
-        <div className={classes.Item}>
-          <div className={classes.ItemTitleAndPrice}>
-            <p className={classes.Title}>
-              Apollo <span>Running Short</span>
-            </p>
-            <p className={classes.Price}>$50.00</p>
-            <div className={classes.Sizes}>
-              <Button sqMini type="square">S</Button>
-              <Button sqMini type="square" sqFull>
-                M
-              </Button>
+        {cart.map((item, i) => (
+          <div className={classes.Item} key={i}>
+            <div className={classes.ItemTitleAndPrice}>
+              <p className={classes.Title}>{item.name}</p>
+              <p className={classes.Price}>
+                {this.calEachItem(item) + ' ' + currency}{' '}
+              </p>
+              <div className={classes.Attributes}>
+                {item.selectedAttributes?.map((el) =>
+                  el.attr === 'Color' ? (
+                    <Button
+                      type="square"
+                      style={{ backgroundColor: el.value }}
+                      sqMini
+                    ></Button>
+                  ) : (
+                    <Button type="square" sqMini>
+                      {el.value}
+                    </Button>
+                  )
+                )}
+              </div>
+            </div>
+            <div className={classes.ImgAndAmountBtns}>
+              <div className={classes.AmountBtns}>
+                <Button sqMini type="square" onClick={() => increaseItem(item)}>
+                  +
+                </Button>
+                <p>{item.count}</p>
+                <Button
+                  sqMini
+                  type="square"
+                  onClick={() => {
+                    item.count > 1 ? descreaseItem(item) : removeItem(item);
+                  }}
+                >
+                  -
+                </Button>
+              </div>
+              <div className={classes.ItemImg}>
+                <img src={item.gallery[0]} alt="" />
+              </div>
             </div>
           </div>
-          <div className={classes.ImgAndAmountBtns}>
-            <div className={classes.AmountBtns}>
-              <Button sqMini type="square">+</Button>
-              <p>1</p>
-              <Button sqMini type="square">-</Button>
-            </div>
-            <div className={classes.ItemImg}>
-              <img src={Img} alt="" />
-            </div>
-          </div>
-        </div>
+        ))}
 
-        <div className={classes.Item}>
-          <div className={classes.ItemTitleAndPrice}>
-            <p className={classes.Title}>
-              Apollo <span>Running Short</span>
-            </p>
-            <p className={classes.Price}>$50.00</p>
-            <div className={classes.Sizes}>
-              <Button sqMini type="square">S</Button>
-              <Button sqMini type="square" sqFull>
-                M
-              </Button>
-            </div>
-          </div>
-          <div className={classes.ImgAndAmountBtns}>
-            <div className={classes.AmountBtns}>
-              <Button sqMini type="square">+</Button>
-              <p>1</p>
-              <Button sqMini type="square">-</Button>
-            </div>
-            <div className={classes.ItemImg}>
-              <img src={Img} alt="" />
-            </div>
-          </div>
-        </div>
-
-          <div className={classes.Item}>
-          <div className={classes.ItemTitleAndPrice}>
-            <p className={classes.Title}>
-              Apollo <span>Running Short</span>
-            </p>
-            <p className={classes.Price}>$50.00</p>
-            <div className={classes.Sizes}>
-              <Button sqMini type="square">S</Button>
-              <Button sqMini type="square" sqFull>
-                M
-              </Button>
-            </div>
-          </div>
-          <div className={classes.ImgAndAmountBtns}>
-            <div className={classes.AmountBtns}>
-              <Button sqMini type="square">+</Button>
-              <p>1</p>
-              <Button sqMini type="square">-</Button>
-            </div>
-            <div className={classes.ItemImg}>
-              <img src={Img} alt="" />
-            </div>
-          </div>
-        </div>
+       
 
         <div className={classes.Total}>
           <p className={classes.TotalText}>total</p>
-          <p className={classes.TotalNumber}>$100.00</p>
+          <p className={classes.TotalNumber}>{this.calTotal(cart) + ' ' + currency}</p>
         </div>
         <div className={classes.ActionBtns}>
-          <Button type="link" to="/mycart" variant="outline">View Bag</Button>
+          <Button type="link" to="/mycart" variant="outline" onClick={cartModalHandler} >
+            View Bag
+          </Button>
           <Button>Check Out</Button>
         </div>
       </Modal>
@@ -100,4 +104,17 @@ export class MiniCart extends Component {
   }
 }
 
-export default MiniCart;
+const mapStateToProps = (state) => ({
+  cart: state.cart.cart,
+  count: state.cart.count,
+  currency: state.currency.currency,
+});
+
+const mapDispatchToProps = {
+  increaseItem: addMoreItem,
+  descreaseItem: addLessItem,
+  removeItem: deleteItem,
+  cartModalHandler: openCart
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCart);

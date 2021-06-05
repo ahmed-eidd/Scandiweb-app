@@ -9,6 +9,7 @@ import Spinner from './components/Spinner/Spinner';
 import { Query } from '@apollo/client/react/components';
 import { GET_PRODUCTS } from './graphql/Queries';
 import { connect } from 'react-redux';
+import CartPage from './components/CartPage/CartPage';
 export class App extends Component {
   filterData = (data, filter) => {
     return data?.filter((item) => item.category === filter);
@@ -66,6 +67,7 @@ export class App extends Component {
                         <ProductPage products={data?.category?.products} />
                       )}
                     />
+                  <Route path="/mycart" exact component={CartPage} />
                   </>
                 )}
               </>

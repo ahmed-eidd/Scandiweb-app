@@ -15,7 +15,8 @@ export class Button extends Component {
       className,
       sqFull,
       sqEmpty,
-      sqMini
+      sqMini,
+      sqActive
     } = this.props;
     // css classes
     const btnClass =
@@ -69,7 +70,8 @@ export class Button extends Component {
         {/* if Button is a Square */}
 
         {type === 'square' && (
-          <div style={style}  className={SquareBtnClasses()}>{children}</div>
+          <div style={style} onClick={onClick}  className={sqActive ? [SquareBtnClasses(), classes.SquareActive].join(' ') : SquareBtnClasses()}>{children}</div>
+        
         )}
       </>
     );

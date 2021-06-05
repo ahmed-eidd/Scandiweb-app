@@ -12,6 +12,7 @@ export class Tech extends Component {
         {console.log(products)}
         {products.map((product) => (
           <Card
+          product={product}
             key={product.name}
             id={product.name}
             title={product.name}
