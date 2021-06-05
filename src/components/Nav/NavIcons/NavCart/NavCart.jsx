@@ -3,7 +3,7 @@ import CartIcon from '../../../Icons/CartIcon';
 import MiniCart from '../../../MiniCart/MiniCart';
 import classes from './NavCart.module.css';
 import { connect } from 'react-redux';
-import { cartOpenAction } from '../../../../store/modals/slice';
+import { openCart } from '../../../../store/modals/actions';
 import Backdrop from '../../../Backdrop/Backdrop';
 
 export class NavCart extends Component {
@@ -56,6 +56,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  openAction: cartOpenAction,
+  openAction: openCart,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NavCart);

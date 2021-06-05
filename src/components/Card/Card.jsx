@@ -3,12 +3,14 @@ import classes from './Card.module.css';
 // import Img from '../../test.png';
 import CartIcon from '../Icons/CartIcon';
 import { Link } from 'react-router-dom';
-import {isInCart} from '../../utilities/isInCart'
+import { isInCart } from '../../utilities/isInCart';
 import { connect } from 'react-redux';
+import { addMoreItem, addItem } from '../../store/cart/actions';
 
 export class Card extends Component {
   render() {
-    const { img, title, price, id, curr,cart,product } = this.props;
+    const { img, title, price, id, curr, cart, product, addMore, addToCart } =
+      this.props;
     return (
       <div className={classes.Card}>
         <Link
@@ -28,17 +30,28 @@ export class Card extends Component {
             {price} {curr}
           </p>
         </div>
-        <div className={classes.CardBtn}>
-          {console.log(isInCart(cart,product))}
-          <CartIcon color="var(--color-light)" />
-        </div>
+        {isInCart(cart, product) ? (
+          <div className={classes.CardBtn} onClick={() => addMore(product)}>
+            <span>+</span>
+            <CartIcon color="var(--color-light)" />
+          </div>
+        ) : (
+          <div className={classes.CardBtn} onClick={() => addToCart(product)}>
+            <CartIcon color="var(--color-light)" />
+          </div>
+        )}
       </div>
     );
   }
 }
 
 const mapStateProps = (state) => ({
-  cart: state.cart.cart
-}) 
+  cart: state.cart.cart,
+});
 
-export default connect(mapStateProps)(Card);
+const mapDispatchToProps = {
+  addToCart: addItem,
+  addMore: addMoreItem,
+};
+
+export default connect(mapStateProps, mapDispatchToProps)(Card);

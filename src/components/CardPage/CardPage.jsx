@@ -4,7 +4,7 @@ import classes from './CardPage.module.css';
 import Img from '../../test.png';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
-import { addToCart, addMore } from '../../store/cart/slice';
+import { addItem, addMoreItem} from '../../store/cart/actions';
 import { isInCart } from '../../utilities/isInCart';
 
 export class CardPage extends Component {
@@ -19,9 +19,9 @@ export class CardPage extends Component {
   };
 
   render() {
-    const { product, currency, addItemToCart, cart, addMore } = this.props;
+    const { product, currency, addItemToCart, cart, addMore, cartSelect } = this.props;
     const { currentImg } = this.state;
-
+  
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
@@ -114,8 +114,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  addItemToCart: addToCart,
-  addMore: addMore,
+  addItemToCart: addItem,
+  addMore: addMoreItem
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardPage);
