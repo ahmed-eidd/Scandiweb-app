@@ -13,12 +13,15 @@ export class CardPage extends Component {
     selectionError: false,
   };
 
+  // select img to view
   selectImg = (img) => {
     this.setState({
       currentImg: img,
     });
   };
 
+
+  // select attribute to add to the cart
   selectAttr = (attr) => {
     const attrIndex = this.state.selectedAttributes.findIndex(
       (x) => x.attr === attr.attr
@@ -50,6 +53,11 @@ export class CardPage extends Component {
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
+
+
+         {/* Gallery */}
+
+
           <div className={classes.MiniGallery}>
             {product.gallery.map((el, i) => (
               <div
@@ -69,9 +77,17 @@ export class CardPage extends Component {
           </div>
         </div>
 
+
         {/* Description */}
+
+
         <div className={classes.Description}>
           <h2 className={classes.Title}>{product.name}</h2>
+          
+
+        {/* Attributes */}
+
+
           <div className={classes.Attributes}>
             {product.attributes.map((attribute, i) => (
               <React.Fragment key={i}>
@@ -124,6 +140,10 @@ export class CardPage extends Component {
               </React.Fragment>
             ))}
           </div>
+
+
+        {/* Price */}
+
 
           <p className={classes.Price}>Price:</p>
           <p className={classes.Number}>

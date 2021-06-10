@@ -21,14 +21,24 @@ export class Card extends Component {
           }}
           to={`/product/${id}`}
         />
+        
+
+        {/* Img */}
+
+
         <div className={classes.CardImg}>
           <img src={img} alt="cardImg" />
         </div>
+
+
         <div className={classes.CardText}>
+
           <p className={classes.CardTitle}>{title}</p>
+
           <p className={classes.CardPrice}>
           {curr}  {price} 
           </p>
+
         </div>
         {isInCart(cart, product) ? (
           <div className={classes.CardBtn} onClick={() => addMore(product)}>

@@ -9,6 +9,8 @@ const initialState = {
 
 const cartRecuder = (state = initialState, action) => {
   const { type, payload } = action;
+
+  // switch for currencies symbols
   const symbols = (curr) => {
     switch (curr) {
       case 'USD':
@@ -22,6 +24,8 @@ const cartRecuder = (state = initialState, action) => {
       case 'RUB':
         return '₽';
     }
+
+
   };
   switch (type) {
     case actions.CHANGE_CURRENCY: {

@@ -20,14 +20,21 @@ const cartRecuder = (state = initialState, action) => {
       const itemIndex = state.cart.findIndex(
         (item) => item?.inCartId === payload?.inCartId
       );
-      console.log(itemIndex)
+    
+     
       if (itemIndex === -1 || payload.inCartId === undefined) {
+        
+        // if item doesn't exist add it to store
+
         return {
           ...state,
           cart: [...state.cart, { ...payload, count: 1 }],
           count: state.count + 1,
         };
       } else {
+
+        // if it does exist increase quantity
+
         state.cart[itemIndex].count++;
         return {
           ...state,
