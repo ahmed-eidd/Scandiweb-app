@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  transition: box-shadow .4s ease-in-out;
+  transition: box-shadow 0.4s ease-in-out;
   cursor: pointer;
 }
 
@@ -18,8 +18,7 @@
 }
 
 .Card:hover .CardBtn {
-  opacity: 1; 
-
+  opacity: 1;
 }
 
 .CardImg {
@@ -61,14 +60,25 @@
   width: 5.2rem;
   border-radius: 50%;
   opacity: 0;
-  transition: opacity .4s ease-in-out, transform .2s ease-in-out;
+  transition: opacity 0.4s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .CardBtn:hover {
-  transform: scale(1.1);  
+  transform: scale(1.1);
 }
 
 .CardBtn span {
-  color: var(--color-light)
-  
+  color: var(--color-light);
+}
+
+.Disabled  {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.OutOfStockTitle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

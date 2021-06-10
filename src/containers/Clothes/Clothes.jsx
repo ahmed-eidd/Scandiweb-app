@@ -19,6 +19,7 @@ export class Clothes extends Component {
             img={product.gallery[0]}
             price={getCurrentPrice(product.prices, currency)}
             curr={symbol}
+            disabled={!product.inStock}
           />
         ))}
       </CardList>

@@ -3,8 +3,12 @@ import Button from '../Button/Button';
 import classes from './CardPage.module.css';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
-import { addItem, addMoreItem, animateCart, HideAnimateCart } from '../../store/cart/actions';
-import parse from 'html-react-parser';
+import {
+  addItem,
+  addMoreItem,
+  animateCart,
+  HideAnimateCart,
+} from '../../store/cart/actions';
 
 export class CardPage extends Component {
   state = {
@@ -20,6 +24,38 @@ export class CardPage extends Component {
     });
   };
 
+
+  // to convet html template to jsx
+  parseHtml = (str) => {
+    
+    // check if node has children or not 
+    const ifHasChilds = (item, index) => {
+
+      // if has children map and return them
+      if (item.children.length > 0) {
+        const itemsArr = [...item.children];
+        const children = itemsArr.map((el) => ifHasChilds(el));
+
+        return React.createElement(item.localName, {key:index}, children);
+      } else {
+
+        // if has no children return elemnt
+        return React.createElement(item.localName, {key:index}, item.innerHTML);
+      }
+    };
+    const parser = new DOMParser();
+    const parsedDoc = parser.parseFromString(str, 'text/html').body.childNodes;
+    const doc = [...parsedDoc];
+    const docArray = [];
+    doc.map((el) => !!el.localName && docArray.push(el));
+
+    // if array doesn't contain any html element 
+    if (docArray.length === 0) return <p>{str}</p>
+    
+     
+    return docArray.map((el,i) => ifHasChilds(el,i));
+
+  };
 
   // select attribute to add to the cart
   selectAttr = (attr) => {
@@ -45,18 +81,20 @@ export class CardPage extends Component {
   };
 
   render() {
-    const { product, currency, addItemToCart, currSymbol, hideAnimateCart, animateCart } = this.props;
+    const {
+      product,
+      currency,
+      addItemToCart,
+      currSymbol,
+      hideAnimateCart,
+      animateCart,
+    } = this.props;
     const { currentImg, selectedAttributes, selectionError } = this.state;
-    console.log(selectedAttributes);
-    console.log(selectionError);
 
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
-
-
-         {/* Gallery */}
-
+          {/* Gallery */}
 
           <div className={classes.MiniGallery}>
             {product.gallery.map((el, i) => (
@@ -77,16 +115,12 @@ export class CardPage extends Component {
           </div>
         </div>
 
-
         {/* Description */}
-
 
         <div className={classes.Description}>
           <h2 className={classes.Title}>{product.name}</h2>
-          
 
-        {/* Attributes */}
-
+          {/* Attributes */}
 
           <div className={classes.Attributes}>
             {product.attributes.map((attribute, i) => (
@@ -141,9 +175,7 @@ export class CardPage extends Component {
             ))}
           </div>
 
-
-        {/* Price */}
-
+          {/* Price */}
 
           <p className={classes.Price}>Price:</p>
           <p className={classes.Number}>
@@ -156,13 +188,13 @@ export class CardPage extends Component {
                 addItemToCart({
                   ...product,
                   selectedAttributes,
-                  inCartId: selectedAttributes.map((attr) => attr.value).join(),
+                  inCartId: product.name + selectedAttributes.map((attr) => attr.value).join(),
                 });
                 this.setState({ selectionError: false });
-              animateCart()                
-              setTimeout(() => {
-                hideAnimateCart()
-              },400)
+                animateCart();
+                setTimeout(() => {
+                  hideAnimateCart();
+                }, 400);
               } else {
                 this.setState({ selectionError: true });
               }
@@ -178,7 +210,9 @@ export class CardPage extends Component {
               You Have to select one of each Attributes
             </p>
           )}
-          <div className={classes.Text}>{parse(product.description)}</div>
+          <div className={classes.Text}>
+            {this.parseHtml(product.description)}
+          </div>
         </div>
       </div>
     );

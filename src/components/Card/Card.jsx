@@ -13,6 +13,7 @@ import {
 } from '../../store/cart/actions';
 
 export class Card extends Component {
+
   onCartAnimation = () => {
     this.props.animateCart();
     setTimeout(() => {
@@ -33,18 +34,28 @@ export class Card extends Component {
       addToCart,
       hideAnimateCart,
       animateCart,
+      disabled,
     } = this.props;
 
+    
     return (
-      <div className={classes.Card}>
-        <Link
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-          }}
-          to={`/product/${id}`}
-        />
+      <div
+        className={
+          !disabled ? classes.Card : [classes.Card, classes.Disabled].join(' ')
+        }
+      >
+        {!disabled ? (
+          <Link
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+            }}
+            to={`/product/${id}`}
+          />
+        ) : (
+          <h2 className={classes.OutOfStockTitle}>Out of Stock</h2>
+        )}
 
         {/* Img */}
 

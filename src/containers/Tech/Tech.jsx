@@ -12,13 +12,14 @@ export class Tech extends Component {
         {console.log(products)}
         {products.map((product) => (
           <Card
-          product={product}
+            product={product}
             key={product.name}
             id={product.name}
             title={product.name}
             img={product.gallery[0]}
             price={getCurrentPrice(product.prices, currency)}
             curr={symbol}
+            disabled={!product.inStock}
           />
         ))}
       </CardList>
@@ -28,7 +29,7 @@ export class Tech extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency?.currency,
-  symbol: state.currency.symbol
+  symbol: state.currency.symbol,
 });
 
 export default connect(mapStateToProps)(Tech);
