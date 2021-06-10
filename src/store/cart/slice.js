@@ -4,11 +4,14 @@ export const actions = {
   DETELE_ITEM: 'DELETE_ITEM',
   ADD_MORE_ITEM: 'ADD_MORE_ITEM',
   ADD_LESS_ITEM: 'ADD_LESS_ITEM',
+  ANIMATE_CART: 'ANIMATE_CART',
+  HIDE_ANITAME_CART: 'HIDE_ANITAME_CART',
 };
 
 const initialState = {
   cart: [],
   count: 0,
+  animateCart: false
 };
 
 const cartRecuder = (state = initialState, action) => {
@@ -70,6 +73,18 @@ const cartRecuder = (state = initialState, action) => {
         cart: state.cart.filter((el) => el.name !== payload.name),
         count: state.count < 0 ? state.count - 1 : 0,
       };
+    }
+    case actions.ANIMATE_CART: {
+      return {
+        ...state,
+        animateCart: true
+      }
+    }
+    case actions.HIDE_ANITAME_CART: {
+      return {
+        ...state,
+        animateCart: false
+      }
     }
     default:
       return state;

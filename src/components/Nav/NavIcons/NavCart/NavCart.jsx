@@ -8,16 +8,16 @@ import Backdrop from '../../../Backdrop/Backdrop';
 
 export class NavCart extends Component {
   render() {
-    const { open, openAction,  cartCount } = this.props;
+    const { open, openAction,  cartCount, cartAnimation } = this.props;
 
     const style = {
       position: 'relative',
-
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       margin: ' 0 .5rem',
       padding: '0.5rem .5rem',
+
     };
     const spanStyle = {
       cursor: 'pointer',
@@ -42,7 +42,7 @@ export class NavCart extends Component {
           <span style={spanStyle} onClick={openAction}>
             {cartCount}
           </span>
-          <CartIcon onClick={openAction} />
+          <CartIcon onClick={openAction} className={cartAnimation ? classes.rotate : ''} />
           <MiniCart open={open} />
           <Backdrop open={open} onClick={openAction} />
         </div>
@@ -55,6 +55,7 @@ const mapStateToProps = (state) => ({
   open: state.modals.cartOpen,
   cart: state.cart.cart,
   cartCount: state.cart.count,
+    cartAnimation: state.cart.animateCart
 });
 
 const mapDispatchToProps = {

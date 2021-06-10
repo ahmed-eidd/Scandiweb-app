@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import classes from './CardPage.module.css';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
-import { addItem, addMoreItem } from '../../store/cart/actions';
+import { addItem, addMoreItem, animateCart, HideAnimateCart } from '../../store/cart/actions';
 import parse from 'html-react-parser';
 
 export class CardPage extends Component {
@@ -45,7 +45,7 @@ export class CardPage extends Component {
   };
 
   render() {
-    const { product, currency, addItemToCart, currSymbol } = this.props;
+    const { product, currency, addItemToCart, currSymbol, hideAnimateCart, animateCart } = this.props;
     const { currentImg, selectedAttributes, selectionError } = this.state;
     console.log(selectedAttributes);
     console.log(selectionError);
@@ -159,6 +159,10 @@ export class CardPage extends Component {
                   inCartId: selectedAttributes.map((attr) => attr.value).join(),
                 });
                 this.setState({ selectionError: false });
+              animateCart()                
+              setTimeout(() => {
+                hideAnimateCart()
+              },400)
               } else {
                 this.setState({ selectionError: true });
               }
@@ -190,6 +194,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   addItemToCart: addItem,
   addMore: addMoreItem,
+  animateCart: animateCart,
+  hideAnimateCart: HideAnimateCart,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CardPage);

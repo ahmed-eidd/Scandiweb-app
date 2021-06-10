@@ -18,8 +18,10 @@ export class NavCurr extends Component {
       open,
       currHandler,
       currencies = [],
-      symbol
+      symbol,
+
     } = this.props;
+
     return (
       <>
         <div className={classes.Container} >
@@ -51,7 +53,8 @@ export class NavCurr extends Component {
 
 const mapStateToProps = (state) => ({
   open: state.modals.currOpen,
-  symbol: state.currency.symbol
+  symbol: state.currency.symbol,
+  cartAnimation: state.cart.animateCart
 });
 const mapDispatchToProps = {
   currHandler: currModalAction,

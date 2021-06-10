@@ -23,3 +23,12 @@ export const deleteItem = (item) => ({
   type:actions.DETELE_ITEM,
   payload: item
 })
+
+
+export const animateCart = () => ({
+  type: actions.ANIMATE_CART
+})
+
+export const HideAnimateCart = () => ({
+  type: actions.HIDE_ANITAME_CART
+})
