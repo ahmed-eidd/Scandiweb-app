@@ -1,40 +1,42 @@
 import React, { Component } from 'react';
-import Button from '../Button/Button';
 import CartIcon from './NavIcons/NavCart/NavCart';
 import DollarIcon from './NavIcons/NavCurr/NavCurr';
 import Logo from '../Logo/Logo';
 import classes from './Nav.module.css';
 import NavItems from './NavItems/NavItems';
 import { Query } from '@apollo/client/react/components';
-import {GET_CURRENCIES} from '../../graphql/Queries'
+import { GET_CURRENCIES } from '../../graphql/Queries';
+import { connect } from 'react-redux';
+import { cartModalAction, currModalAction } from '../../store/modals/actions';
 
 export class Nav extends Component {
-  state = {
-    currOpen: false,
-    cartOpen: false,
-  };
-
-  onCurrHandler = () => {
-    this.setState({ currOpen: !this.state.currOpen, cartOpen: false });
-  };
-
   render() {
-    const { currOpen, cartOpen } = this.state;
     return (
       <Query query={GET_CURRENCIES}>
-        {({data, loading}) => (
-          <div className={classes.Nav}>
+        {({ data  }) => (
+          <nav className={classes.Nav}
+        >
             <NavItems />
             <Logo />
             <div className={classes.Icons}>
               <DollarIcon currencies={data?.currencies} />
               <CartIcon />
             </div>
-          </div>
+          </nav>
         )}
       </Query>
     );
   }
 }
 
-export default Nav;
+const mapStateToProps = (state) => ({
+  cartOpen: state.modals.cartOpen,
+  currOpen: state.modals.currOpen,
+});
+
+const mapDispatchToProps = {
+  cartHandler: cartModalAction,
+  currHandler: currModalAction,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);

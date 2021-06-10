@@ -9,3 +9,13 @@
 
   transition: opacity 0.4s ease-in-out 0s;
 }
+
+.Outsidedrop {
+  height: 8rem;
+  width: 100%;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}

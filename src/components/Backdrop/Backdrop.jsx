@@ -3,15 +3,19 @@ import React, { Component } from 'react';
 
 export class Backdrop extends Component {
   render() {
-    const { open } = this.props;
+    const { open, onClick } = this.props;
     return (
       <div
+        onClick={onClick}
         style={{
           opacity: open ? 1 : 0,
           pointerEvents: open ? 'auto' : 'none',
         }}
-        className={classes.Backdrop}
-      ></div>
+        className={classes.Container}
+      >
+        <div className={classes.Outsidedrop} ></div>
+        <div className={classes.Backdrop}></div>
+      </div>
     );
   }
 }

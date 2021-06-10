@@ -3,16 +3,16 @@ import CartIcon from '../../../Icons/CartIcon';
 import MiniCart from '../../../MiniCart/MiniCart';
 import classes from './NavCart.module.css';
 import { connect } from 'react-redux';
-import { openCart } from '../../../../store/modals/actions';
+import { cartModalAction } from '../../../../store/modals/actions';
 import Backdrop from '../../../Backdrop/Backdrop';
 
 export class NavCart extends Component {
   render() {
-    const { open, openAction,cart, cartCount } = this.props;
+    const { open, openAction,  cartCount } = this.props;
 
     const style = {
       position: 'relative',
- 
+
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -39,10 +39,12 @@ export class NavCart extends Component {
     return (
       <>
         <div style={style}>
-            <span style={spanStyle} onClick={openAction}>{cartCount}</span>
-            <CartIcon onClick={openAction} />
+          <span style={spanStyle} onClick={openAction}>
+            {cartCount}
+          </span>
+          <CartIcon onClick={openAction} />
           <MiniCart open={open} />
-          <Backdrop open={open} />
+          <Backdrop open={open} onClick={openAction} />
         </div>
       </>
     );
@@ -56,6 +58,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  openAction: openCart,
+  openAction: cartModalAction,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(NavCart);

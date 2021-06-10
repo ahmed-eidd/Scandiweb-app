@@ -1,5 +1,3 @@
-import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
-import { mergeByIde } from '../../utilities/mergeById';
 
 export const actions = {
   ADD_ITEM: 'ADD_ITEM',
@@ -17,12 +15,27 @@ const cartRecuder = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
     case actions.ADD_ITEM: {
-      return {
-        ...state,
-        cart: [...state.cart, { ...payload, count: 1 }],
-        count: state.count + 1,
-      };
+
+      // item index
+      const itemIndex = state.cart.findIndex(
+        (item) => item?.inCartId === payload?.inCartId
+      );
+      console.log(itemIndex)
+      if (itemIndex === -1 || payload.inCartId === undefined) {
+        return {
+          ...state,
+          cart: [...state.cart, { ...payload, count: 1 }],
+          count: state.count + 1,
+        };
+      } else {
+        state.cart[itemIndex].count++;
+        return {
+          ...state,
+          cart: [...state.cart],
+        };
+      }
     }
+
     case actions.ADD_MORE_ITEM: {
       state.cart[
         state.cart.findIndex((item) => item.name === action.payload.name)
@@ -34,7 +47,6 @@ const cartRecuder = (state = initialState, action) => {
       };
     }
     case actions.ADD_LESS_ITEM: {
-
       state.cart[
         state.cart.findIndex((item) => item.name === action.payload.name)
       ].count--;
@@ -49,8 +61,8 @@ const cartRecuder = (state = initialState, action) => {
       return {
         ...state,
         cart: state.cart.filter((el) => el.name !== payload.name),
-        count: state.count < 0 ? state.count - 1 : 0
-      }
+        count: state.count < 0 ? state.count - 1 : 0,
+      };
     }
     default:
       return state;
@@ -58,54 +70,3 @@ const cartRecuder = (state = initialState, action) => {
 };
 
 export default cartRecuder;
-
-// export const cartAdapter = createEntityAdapter({
-//   selectId: (product) => product.name,
-// });
-
-// export const cartSelector = cartAdapter.getSelectors(state => state.cart);
-
-// export const cartSlice = createSlice({
-//   name: 'cartSlice',
-//   initialState: cartAdapter.getInitialState({
-//     cart: [],
-//     count: 0,
-//   }),
-//   initialState: {
-
-//     cart: [],
-//     count: 0,
-
-//   },
-//   reducers: {
-//     addToCart: (state, action) => {
-//       state.cart = mergeByIde(state.cart, [{ ...action.payload, count: 1 }]);
-//       state.count = state.cart.length;
-//     },
-//     addToCart: (state, action) => {
-//       console.log('p', action.payload);
-//       cartAdapter.addOne(state, {...action.payload, count: 1});
-//       state.count = state.ids.length;
-//     },
-//     removeFromCart: (state, action) => {
-//       state.cart = state.cart.filter((item) => item.name !== action.payload);
-//       state.count = state.cart.length;
-//     },
-//     addMore: (state, action) => {
-//       console.log(state)
-//       // state.cart = [
-//       //   ...state.cart,
-//       //   state.cart[
-//       //     state.cart.find((item) => item.name === action.payload.name)
-//       //   ].count++,
-//       // ];
-//     },
-//     addMore: (state, action) => {
-//       cartAdapter.updateOne(state,);
-//     },
-//   },
-// });
-
-// export const { addToCart, removeFromCart, addMore } = cartSlice.actions;
-
-// export default cartSlice.reducer;

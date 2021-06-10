@@ -4,7 +4,7 @@ import Layout from './components/Layout/Layout';
 import ProductPage from './containers/ProductPage/ProductPage';
 import Home from './containers/Home/Home.jsx';
 import Tech from './containers/Tech/Tech';
-import clothes, { Clothes } from './containers/Clothes/Clothes';
+import Clothes from './containers/Clothes/Clothes';
 import Spinner from './components/Spinner/Spinner';
 import { Query } from '@apollo/client/react/components';
 import { GET_PRODUCTS } from './graphql/Queries';
@@ -16,7 +16,6 @@ export class App extends Component {
   };
 
   render() {
-    const {currency} = this.props
     return (
       <Layout>
         <Switch>
@@ -39,7 +38,7 @@ export class App extends Component {
                       exact
                       render={() => (
                         <Clothes
-                          currency={currency}
+                       
                           products={this.filterData(
                             data?.category?.products,
                             'clothes'

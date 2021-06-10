@@ -6,19 +6,19 @@ import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 
 export class Clothes extends Component {
   render() {
-    const { products, currency, test   } = this.props;
+    const { products, currency, symbol } = this.props;
     return (
       <CardList>
         {console.log(this.props)}
         {products.map((product) => (
           <Card
-          product={product}
+            product={product}
             key={product.name}
             id={product.name}
             title={product.name}
             img={product.gallery[0]}
             price={getCurrentPrice(product.prices, currency)}
-            curr={currency}
+            curr={symbol}
           />
         ))}
       </CardList>
@@ -28,6 +28,7 @@ export class Clothes extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency?.currency,
+  symbol: state.currency.symbol,
 });
 
 export default connect(mapStateToProps)(Clothes);

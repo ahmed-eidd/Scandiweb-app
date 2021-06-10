@@ -1,37 +1,49 @@
 import React, { Component } from 'react';
 import classes from './NavCurr.module.css';
 import { connect } from 'react-redux';
-import { openCurr } from '../../../../store/modals/actions';
+import { currModalAction } from '../../../../store/modals/actions';
 import Modal from '../../../Modal/Modal';
 import Backdrop from '../../../Backdrop/Backdrop';
-import DollarIcon from '../../../Icons/DollarIcon';
 import ArrowIcon from '../../../Icons/ArrowIcon';
-import {changeCurrency} from '../../../../store/currency/actions'
+import { changeCurrency } from '../../../../store/currency/actions';
 
 export class NavCurr extends Component {
-
   onCurrHandler = (curr) => {
-    this.props.currChange(curr)
-    this.props.currHandler(); 
-  }
+    this.props.currChange(curr);
+    this.props.currHandler();
+  };
 
   render() {
-    const { open, onClick, currHandler, currencies = [], currChange } = this.props;
+    const {
+      open,
+      currHandler,
+      currencies = [],
+      symbol
+    } = this.props;
     return (
       <>
-        <div className={classes.Container}>
-          <div className={classes.IconContainer} onClick={currHandler}>
-            <DollarIcon />
+        <div className={classes.Container} >
+          <div className={classes.clicker} onClick={currHandler}></div>
+          <div className={classes.IconContainer}>
+            <div className={classes.symbol}>
+              {symbol}
+            </div>
             <ArrowIcon open={open} />
           </div>
 
           <Modal open={open} className={classes.curr} top="100%">
             {currencies?.map((el) => (
-              <div className={classes.currItem} onClick={() => this.onCurrHandler(el)} key={el}>{el}</div>
+              <div
+                className={classes.currItem}
+                onClick={() => this.onCurrHandler(el)}
+                key={el}
+              >
+                {el}
+              </div>
             ))}
           </Modal>
         </div>
-        <Backdrop open={open} />
+        <Backdrop open={open} onClick={currHandler} />
       </>
     );
   }
@@ -39,10 +51,11 @@ export class NavCurr extends Component {
 
 const mapStateToProps = (state) => ({
   open: state.modals.currOpen,
+  symbol: state.currency.symbol
 });
 const mapDispatchToProps = {
-  currHandler: openCurr,
-  currChange: changeCurrency
+  currHandler: currModalAction,
+  currChange: changeCurrency,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavCurr);

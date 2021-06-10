@@ -8,7 +8,7 @@ import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 export class CartPage extends Component {
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
-    return itemCount * getCurrentPrice(item.prices, this.props.currency);
+    return (itemCount * getCurrentPrice(item.prices, this.props.currency)).toFixed(2);
   };
   render() {
     const { increaseItem, descreaseItem, removeItem, cart, currency } =
@@ -27,15 +27,16 @@ export class CartPage extends Component {
                 {this.calEachItem(item) + ' ' + currency}{' '}
               </p>
               <div className={classes.Attributes}>
-                {item.selectedAttributes?.map((el) =>
+                {item.selectedAttributes?.map((el,i) =>
                   el.attr === 'Color' ? (
                     <Button
+                    key={i}
                       type="square"
                       style={{ backgroundColor: el.value }}
                       
                     ></Button>
                   ) : (
-                    <Button type="square" >
+                    <Button key={i} type="square" >
                       {el.value}
                     </Button>
                   )

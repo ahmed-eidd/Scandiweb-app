@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Button from '../Button/Button';
 import classes from './CardPage.module.css';
-import Img from '../../test.png';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 import { addItem, addMoreItem } from '../../store/cart/actions';
-import { isInCart } from '../../utilities/isInCart';
+import parse from 'html-react-parser';
 
 export class CardPage extends Component {
   state = {
@@ -43,8 +42,7 @@ export class CardPage extends Component {
   };
 
   render() {
-    const { product, currency, addItemToCart, cart, addMore, cartSelect } =
-      this.props;
+    const { product, currency, addItemToCart, currSymbol } = this.props;
     const { currentImg, selectedAttributes, selectionError } = this.state;
     console.log(selectedAttributes);
     console.log(selectionError);
@@ -59,7 +57,7 @@ export class CardPage extends Component {
                 onClick={() => this.selectImg(el)}
                 key={i}
               >
-                <img src={el} alt="mini Product Image" />
+                <img src={el} alt="mini Product Photo" />
               </div>
             ))}
           </div>
@@ -76,15 +74,12 @@ export class CardPage extends Component {
           <h2 className={classes.Title}>{product.name}</h2>
           <div className={classes.Attributes}>
             {product.attributes.map((attribute, i) => (
-              <>
-                <p className={classes.Attribute} key={i}>
-                  {attribute.name}
-                </p>
+              <React.Fragment key={i}>
+                <p className={classes.Attribute}>{attribute.name}</p>
                 <div className={classes.AttributeBtns}>
                   {attribute.items.map((item, i) => {
-                    let btn;
                     if (attribute.type === 'swatch') {
-                      return (btn = (
+                      return (
                         <Button
                           sqActive={
                             !!selectedAttributes.find(
@@ -102,7 +97,7 @@ export class CardPage extends Component {
                             })
                           }
                         />
-                      ));
+                      );
                     }
                     return (
                       <Button
@@ -126,44 +121,40 @@ export class CardPage extends Component {
                     );
                   })}
                 </div>
-              </>
+              </React.Fragment>
             ))}
           </div>
 
           <p className={classes.Price}>Price:</p>
           <p className={classes.Number}>
-            {getCurrentPrice(product.prices, currency) + ' ' + currency}{' '}
+            {currSymbol + ' ' + getCurrentPrice(product.prices, currency)}{' '}
           </p>
-          {isInCart(cart, product) ? (
-            <Button style={{ width: '100%' }} onClick={() => addMore(product)}>
-              Add More
-            </Button>
-          ) : (
-            <Button
-              onClick={() => {
-                if (product.attributes.length === selectedAttributes.length) {
-                  addItemToCart({ ...product, selectedAttributes });
-                  this.setState({ selectionError: false });
-                } else {
-                  this.setState({ selectionError: true });
-                }
-              }}
-              style={{
-                width: '100%',
-              }}
-            >
-              ADD TO CART
-            </Button>
-          )}
+
+          <Button
+            onClick={() => {
+              if (product.attributes.length === selectedAttributes.length) {
+                addItemToCart({
+                  ...product,
+                  selectedAttributes,
+                  inCartId: selectedAttributes.map((attr) => attr.value).join(),
+                });
+                this.setState({ selectionError: false });
+              } else {
+                this.setState({ selectionError: true });
+              }
+            }}
+            style={{
+              width: '100%',
+            }}
+          >
+            ADD TO CART
+          </Button>
           {selectionError && (
             <p className={classes.Warning}>
               You Have to select one of each Attributes
             </p>
           )}
-          <div
-            className={classes.Text}
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          ></div>
+          <div className={classes.Text}>{parse(product.description)}</div>
         </div>
       </div>
     );
@@ -173,6 +164,7 @@ export class CardPage extends Component {
 const mapStateToProps = (state) => ({
   currency: state.currency.currency,
   cart: state.cart.cart,
+  currSymbol: state.currency.symbol,
 });
 
 const mapDispatchToProps = {

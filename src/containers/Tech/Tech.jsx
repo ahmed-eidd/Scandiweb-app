@@ -6,7 +6,7 @@ import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 
 export class Tech extends Component {
   render() {
-    const { products, currency } = this.props;
+    const { products, currency, symbol } = this.props;
     return (
       <CardList>
         {console.log(products)}
@@ -18,7 +18,7 @@ export class Tech extends Component {
             title={product.name}
             img={product.gallery[0]}
             price={getCurrentPrice(product.prices, currency)}
-            curr={currency}
+            curr={symbol}
           />
         ))}
       </CardList>
@@ -28,6 +28,7 @@ export class Tech extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency?.currency,
+  symbol: state.currency.symbol
 });
 
 export default connect(mapStateToProps)(Tech);

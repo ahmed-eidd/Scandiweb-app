@@ -27,7 +27,7 @@ export class Card extends Component {
         <div className={classes.CardText}>
           <p className={classes.CardTitle}>{title}</p>
           <p className={classes.CardPrice}>
-            {price} {curr}
+          {curr}  {price} 
           </p>
         </div>
         {isInCart(cart, product) ? (

@@ -24,7 +24,7 @@ export class Button extends Component {
         ? [classes.btn, classes.outline, className].join(' ')
         : [classes.btn, classes.filled, className].join(' ');
     const SquareBtnClasses = () => {
-      let mainClass = sqMini
+      const mainClass = sqMini
         ? [classes.Square, classes.SquareMini].join(' ')
         : classes.Square;
       if (sqFull) {

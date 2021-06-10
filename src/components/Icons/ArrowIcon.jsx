@@ -5,7 +5,7 @@ export class ArrowIcon extends Component {
     const { open, className, width = 8, height = 4, style } = this.props;
     return (
       <svg
-      style={style}
+        style={style}
         className={className}
         width={width}
         height={height}
