@@ -71,7 +71,7 @@ const cartRecuder = (state = initialState, action) => {
       return {
         ...state,
         cart: state.cart.filter((el) => el.inCartId !== payload.inCartId),
-        count: state.count < 0 ? state.count - 1 : 0,
+        count: state.count > 0 ? state.count - 1 : 0,
       };
     }
     case actions.ANIMATE_CART: {
