@@ -13,12 +13,21 @@ import {
 } from '../../store/cart/actions';
 
 export class Card extends Component {
-
   onCartAnimation = () => {
     this.props.animateCart();
     setTimeout(() => {
       this.props.hideAnimateCart();
     }, 400);
+  };
+
+  selectArttributesByDefault = (attr) => {
+    return attr.map((el) => {
+      return {
+        value: el.items[0].value,
+        attr: el.name,
+        id: el.items[0].id,
+      };
+    });
   };
 
   render() {
@@ -37,7 +46,6 @@ export class Card extends Component {
       disabled,
     } = this.props;
 
-    
     return (
       <div
         className={
@@ -75,7 +83,16 @@ export class Card extends Component {
           <div
             className={classes.CardBtn}
             onClick={() => {
-              addMore(product);
+              addMore({
+                ...product,
+                inCartId:
+                  product.name +
+                  this.selectArttributesByDefault(product.attributes)
+                    .map((attr) => {
+                      return attr.value;
+                    })
+                    .join(),
+              });
               this.onCartAnimation();
             }}
           >
@@ -86,7 +103,19 @@ export class Card extends Component {
           <div
             className={classes.CardBtn}
             onClick={() => {
-              addToCart(product);
+              addToCart({
+                ...product,
+                inCartId:
+                  product.name +
+                  this.selectArttributesByDefault(product.attributes)
+                    .map((attr) => {
+                      return attr.value;
+                    })
+                    .join(),
+                selectedAttributes: this.selectArttributesByDefault(
+                  product.attributes
+                ),
+              });
               this.onCartAnimation();
             }}
           >

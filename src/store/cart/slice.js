@@ -48,7 +48,7 @@ const cartRecuder = (state = initialState, action) => {
 
     case actions.ADD_MORE_ITEM: {
       state.cart[
-        state.cart.findIndex((item) => item.name === action.payload.name)
+        state.cart.findIndex((item) => item.inCartId === action.payload.inCartId)
       ].count++;
 
       return {
@@ -58,7 +58,7 @@ const cartRecuder = (state = initialState, action) => {
     }
     case actions.ADD_LESS_ITEM: {
       state.cart[
-        state.cart.findIndex((item) => item.name === action.payload.name)
+        state.cart.findIndex((item) => item.inCartId === action.payload.inCartId)
       ].count--;
 
       return {
@@ -70,7 +70,7 @@ const cartRecuder = (state = initialState, action) => {
     case actions.DETELE_ITEM: {
       return {
         ...state,
-        cart: state.cart.filter((el) => el.name !== payload.name),
+        cart: state.cart.filter((el) => el.inCartId !== payload.inCartId),
         count: state.count < 0 ? state.count - 1 : 0,
       };
     }

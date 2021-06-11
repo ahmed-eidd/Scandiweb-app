@@ -17,12 +17,17 @@ export class CardPage extends Component {
     selectionError: false,
   };
 
+
+
+
   // select img to view
   selectImg = (img) => {
     this.setState({
       currentImg: img,
     });
   };
+
+
 
 
   // to convet html template to jsx
@@ -57,6 +62,9 @@ export class CardPage extends Component {
 
   };
 
+
+
+
   // select attribute to add to the cart
   selectAttr = (attr) => {
     const attrIndex = this.state.selectedAttributes.findIndex(
@@ -80,6 +88,9 @@ export class CardPage extends Component {
     }
   };
 
+
+
+  
   render() {
     const {
       product,
