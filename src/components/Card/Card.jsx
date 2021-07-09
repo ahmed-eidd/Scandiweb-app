@@ -30,45 +30,45 @@ export class Card extends Component {
     });
   };
 
+  onAddItemToCartHandler = () => {
+    this.props.addToCart({
+      ...this.props.product,
+      inCartId:
+        this.props.product.name +
+        this.selectArttributesByDefault(this.props.product.attributes)
+          .map((attr) => {
+            return attr.value;
+          })
+          .join(),
+      selectedAttributes: this.selectArttributesByDefault(
+        this.props.product.attributes
+      ),
+    });
+    this.onCartAnimation();
+  };
   render() {
-    const {
-      img,
-      title,
-      price,
-      id,
-      curr,
-      cart,
-      product,
-      addMore,
-      addToCart,
-      disabled,
-    } = this.props;
+    const { img, title, price, id, curr, cart, product, disabled } = this.props;
 
     return (
       <div
         className={
           !disabled ? classes.Card : [classes.Card, classes.Disabled].join(' ')
         }
+ 
       >
-        {!disabled ? (
-          <Link
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-            }}
-            to={`/product/${id}`}
-          />
-        ) : (
-          <h2 className={classes.OutOfStockTitle}>Out of Stock</h2>
-        )}
-
+        <Link
+          style={{
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+          }}
+          to={`/product/${id}`}
+        />
+        {disabled && <h2 className={classes.OutOfStockTitle}>Out of Stock</h2>}
         {/* Img */}
-
         <div className={classes.CardImg}>
-          <img src={img} alt="cardImg" />
+          <img src={img} alt='cardImg' />
         </div>
-
         <div className={classes.CardText}>
           <p className={classes.CardTitle}>{title}</p>
 
@@ -76,48 +76,19 @@ export class Card extends Component {
             {curr} {price}
           </p>
         </div>
-
-        {isInCart(cart, product) ? (
+        {!disabled && (
           <div
             className={classes.CardBtn}
-            onClick={() => {
-              addMore({
-                ...product,
-                inCartId:
-                  product.name +
-                  this.selectArttributesByDefault(product.attributes)
-                    .map((attr) => {
-                      return attr.value;
-                    })
-                    .join(),
-              });
-              this.onCartAnimation();
-            }}
+            onClick={this.onAddItemToCartHandler}
           >
-            <span>+</span>
-            <CartIcon color="var(--color-light)" />
-          </div>
-        ) : (
-          <div
-            className={classes.CardBtn}
-            onClick={() => {
-              addToCart({
-                ...product,
-                inCartId:
-                  product.name +
-                  this.selectArttributesByDefault(product.attributes)
-                    .map((attr) => {
-                      return attr.value;
-                    })
-                    .join(),
-                selectedAttributes: this.selectArttributesByDefault(
-                  product.attributes
-                ),
-              });
-              this.onCartAnimation();
-            }}
-          >
-            <CartIcon color="var(--color-light)" />
+            {isInCart(cart, product) ? (
+              <>
+                <span>+</span>
+                <CartIcon color='var(--color-light)' />
+              </>
+            ) : (
+              <CartIcon color='var(--color-light)' />
+            )}
           </div>
         )}
       </div>

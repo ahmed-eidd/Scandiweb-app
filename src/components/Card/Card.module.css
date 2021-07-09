@@ -9,12 +9,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  transition: box-shadow 0.4s ease-in-out;
+  transition: box-shadow 0.4s ease-in-out, opacity 0.4s ease-in-out;
   cursor: pointer;
 }
 
 .Card:hover {
   box-shadow: var(--shadow-lighter);
+  opacity: 1;
 }
 
 .Card:hover .CardBtn {
@@ -71,9 +72,9 @@
   color: var(--color-light);
 }
 
-.Disabled  {
+.Disabled {
   opacity: 0.5;
-  pointer-events: none;
+
 }
 
 .OutOfStockTitle {
