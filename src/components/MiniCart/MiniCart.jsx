@@ -15,10 +15,15 @@ export class MiniCart extends Component {
 
   calTotal = (cart) => {
     const eachItemPrice = [];
-    cart.map((el) => {
-      const price = getCurrentPrice(el.prices, this.props.currency);
-      eachItemPrice.push(price * el.count);
-    });
+    // cart.map((el) => {
+    //   const price = getCurrentPrice(el.prices, this.props.currency);
+    //   eachItemPrice.push(price * el.count);
+    // });
+
+    for (let item of cart) {
+      const price = getCurrentPrice(item.prices, this.props.currency);
+      eachItemPrice.push(price * item.count);
+    }
 
     const totalPrice = eachItemPrice.reduce((curr, acc) => curr + acc, 0);
     return totalPrice.toFixed(2);

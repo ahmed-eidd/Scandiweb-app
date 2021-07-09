@@ -23,6 +23,8 @@ const cartRecuder = (state = initialState, action) => {
         return '¥';
       case 'RUB':
         return '₽';
+      default:
+        return null
     }
 
 

@@ -5,7 +5,7 @@ export class ArrowIcon extends Component {
     const { open, className, width = 8, height = 4, style } = this.props;
     return (
       <svg
-        style={style}
+      
         className={className}
         width={width}
         height={height}
@@ -15,6 +15,7 @@ export class ArrowIcon extends Component {
         style={{
           transform: open ? ' rotate(180deg)' : ' rotate(0deg)',
           transition: 'transform .2s ease-in-out',
+          ...style
         }}
       >
         <path

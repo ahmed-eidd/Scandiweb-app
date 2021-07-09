@@ -114,7 +114,7 @@ export class CardPage extends Component {
                 onClick={() => this.selectImg(el)}
                 key={i}
               >
-                <img src={el} alt="mini Product Photo" />
+                <img src={el} alt="mini Product" />
               </div>
             ))}
           </div>

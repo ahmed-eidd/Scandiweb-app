@@ -10,7 +10,7 @@ export class Clothes extends Component {
     return (
       <CardList>
         {console.log(this.props)}
-        {products.map((product) => (
+        {products?.map((product) => (
           <Card
             product={product}
             key={product.name}

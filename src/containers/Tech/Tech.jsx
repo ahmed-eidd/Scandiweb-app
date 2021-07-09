@@ -10,7 +10,7 @@ export class Tech extends Component {
     return (
       <CardList>
         {console.log(products)}
-        {products.map((product) => (
+        {products?.map((product) => (
           <Card
             product={product}
             key={product.name}

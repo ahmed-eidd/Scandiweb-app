@@ -41,8 +41,6 @@ export class Card extends Component {
       product,
       addMore,
       addToCart,
-      hideAnimateCart,
-      animateCart,
       disabled,
     } = this.props;
 

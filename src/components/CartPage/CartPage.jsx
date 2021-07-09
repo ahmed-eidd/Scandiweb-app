@@ -18,7 +18,6 @@ export class CartPage extends Component {
       descreaseItem,
       removeItem,
       cart,
-      currency,
       currSymbol,
     } = this.props;
 
@@ -79,7 +78,6 @@ export class CartPage extends Component {
 
 const mapStateToProps = (state) => ({
   cart: state.cart.cart,
-  currency: state.currency.currency,
   currSymbol: state.currency.symbol,
 });
 
