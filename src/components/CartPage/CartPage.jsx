@@ -4,8 +4,14 @@ import { connect } from 'react-redux';
 import Button from '../Button/Button';
 import { addLessItem, addMoreItem, deleteItem } from '../../store/cart/actions';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
+import ItemGallery from './ItemGallery/ItemGallery';
 
 export class CartPage extends Component {
+  state = {
+  
+    galleryImgIndex: 0,
+  };
+
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
     console.log(itemCount);
@@ -13,6 +19,8 @@ export class CartPage extends Component {
       itemCount * getCurrentPrice(item.prices, this.props.currency)
     ).toFixed(2);
   };
+
+ 
   render() {
     const {
       increaseItem,
@@ -23,6 +31,8 @@ export class CartPage extends Component {
       currency,
     } = this.props;
 
+    const { galleryImgIndex } = this.state;
+    console.log(galleryImgIndex);
     return (
       <div>
         <h1 style={{ marginBottom: '3rem', textTransform: 'uppercase' }}>
@@ -66,9 +76,14 @@ export class CartPage extends Component {
                   <i className='fas fa-minus'></i>
                 </Button>
               </div>
-              <div className={classes.ItemImg}>
-                <img src={item.gallery[0]} alt='' />
-              </div>
+              {/* <div className={classes.ItemImg}>
+                <div className={classes.ItemImgBtns}>
+                  <i className='fas fa-chevron-left'></i>
+                  <i className='fas fa-chevron-right' onClick={() => this.galleryNextImgHandler(item.gallery)}></i>
+                </div>
+                <img src={item.gallery[galleryImgIndex]} alt='' />
+              </div> */}
+              <ItemGallery gallery={item.gallery} />
             </div>
           </div>
         ))}

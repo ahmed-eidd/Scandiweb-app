@@ -2,22 +2,20 @@
   height: 22rem;
   padding: 2rem 0;
   width: 100%;
-  margin-bottom: 2rem ;
+  margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
 }
 
-
 .Item::before {
   content: '';
   width: 100%;
   height: 1px;
-  background-color: #E5E5E5;
-  position:absolute; 
+  background-color: #e5e5e5;
+  position: absolute;
   top: 0;
-
 }
 
 /* .Item::after {
@@ -30,7 +28,6 @@
 
 } */
 
-
 .ItemTitleAndPrice {
   display: flex;
   flex-direction: column;
@@ -39,7 +36,9 @@
   height: 100%;
 }
 
-.Title,.Price,.Attributes {
+.Title,
+.Price,
+.Attributes {
   margin-bottom: 3rem;
 }
 
@@ -87,16 +86,7 @@
   font-weight: 600;
 }
 
-.ItemImg {
-  height: 100%;
-  width: 14rem;
-}
 
-.ItemImg img {
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-}
 
 .Total {
   display: flex;
@@ -105,4 +95,3 @@
   width: 100%;
   margin: 4rem 0;
 }
-
