@@ -42,6 +42,7 @@ const cartRecuder = (state = initialState, action) => {
         return {
           ...state,
           cart: [...state.cart],
+          count: ++state.count
         };
       }
     }
@@ -54,6 +55,7 @@ const cartRecuder = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart],
+        count: ++state.count 
       };
     }
     case actions.ADD_LESS_ITEM: {
@@ -64,6 +66,7 @@ const cartRecuder = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart],
+        count: --state.count
       };
     }
 
