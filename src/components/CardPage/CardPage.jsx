@@ -17,9 +17,6 @@ export class CardPage extends Component {
     selectionError: false,
   };
 
-
-
-
   // select img to view
   selectImg = (img) => {
     this.setState({
@@ -27,25 +24,23 @@ export class CardPage extends Component {
     });
   };
 
-
-
-
   // to convet html template to jsx
   parseHtml = (str) => {
-    
-    // check if node has children or not 
+    // check if node has children or not
     const ifHasChilds = (item, index) => {
-
       // if has children map and return them
       if (item.children.length > 0) {
         const itemsArr = [...item.children];
         const children = itemsArr.map((el) => ifHasChilds(el));
 
-        return React.createElement(item.localName, {key:index}, children);
+        return React.createElement(item.localName, { key: index }, children);
       } else {
-
         // if has no children return elemnt
-        return React.createElement(item.localName, {key:index}, item.innerHTML);
+        return React.createElement(
+          item.localName,
+          { key: index },
+          item.innerHTML
+        );
       }
     };
     const parser = new DOMParser();
@@ -54,16 +49,11 @@ export class CardPage extends Component {
     const docArray = [];
     doc.map((el) => !!el.localName && docArray.push(el));
 
-    // if array doesn't contain any html element 
-    if (docArray.length === 0) return <p>{str}</p>
-    
-     
-    return docArray.map((el,i) => ifHasChilds(el,i));
+    // if array doesn't contain any html element
+    if (docArray.length === 0) return <p>{str}</p>;
 
+    return docArray.map((el, i) => ifHasChilds(el, i));
   };
-
-
-
 
   // select attribute to add to the cart
   selectAttr = (attr) => {
@@ -80,7 +70,7 @@ export class CardPage extends Component {
           ...prevState,
           selectedAttributes: prevState.selectedAttributes.map((el) =>
             el.attr === this.state.selectedAttributes[attrIndex].attr
-              ? { ...el, value: attr.value }
+              ? { ...el, value: attr.value, id: attr.id }
               : el
           ),
         };
@@ -88,9 +78,6 @@ export class CardPage extends Component {
     }
   };
 
-
-
-  
   render() {
     const {
       product,
@@ -102,6 +89,7 @@ export class CardPage extends Component {
     } = this.props;
     const { currentImg, selectedAttributes, selectionError } = this.state;
 
+    console.log(selectedAttributes);
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
@@ -114,14 +102,14 @@ export class CardPage extends Component {
                 onClick={() => this.selectImg(el)}
                 key={i}
               >
-                <img src={el} alt="mini Product" />
+                <img src={el} alt='mini Product' />
               </div>
             ))}
           </div>
           <div className={classes.MainImg}>
             <img
               src={!currentImg ? product.gallery[0] : currentImg}
-              alt="main"
+              alt='main'
             />
           </div>
         </div>
@@ -144,16 +132,16 @@ export class CardPage extends Component {
                         <Button
                           sqActive={
                             !!selectedAttributes.find(
-                              (el) => el.value === item.value
+                              (el) => el.id === attribute.id + item.id
                             )
                           }
                           key={i}
-                          type="square"
+                          type='square'
                           style={{ backgroundColor: item.value }}
                           onClick={() =>
                             this.selectAttr({
                               attr: attribute.name,
-                              id: item.id,
+                              id: attribute.id + item.id,
                               value: item.value,
                             })
                           }
@@ -164,19 +152,20 @@ export class CardPage extends Component {
                       <Button
                         sqActive={
                           !!selectedAttributes.find(
-                            (el) => el.value === item.value
+                            (el) => el.id === attribute.id + item.id
                           )
                         }
-                        type="square"
+                        type='square'
                         key={i}
                         onClick={() =>
                           this.selectAttr({
                             attr: attribute.name,
-                            id: item.id,
+                            id: attribute.id + item.id,
                             value: item.value,
                           })
                         }
                       >
+                        {console.log()}
                         {item.value}
                       </Button>
                     );
@@ -192,30 +181,36 @@ export class CardPage extends Component {
           <p className={classes.Number}>
             {currSymbol + ' ' + getCurrentPrice(product.prices, currency)}{' '}
           </p>
+          {product.inStock ? (
+            <Button
+              className={classes.Btn}
+              onClick={() => {
+                if (product.attributes.length === selectedAttributes.length) {
+                  addItemToCart({
+                    ...product,
+                    selectedAttributes,
+                    inCartId:
+                      product.name +
+                      selectedAttributes.map((attr) => attr.value).join(),
+                  });
+                  this.setState({ selectionError: false });
+                  animateCart();
+                  setTimeout(() => {
+                    hideAnimateCart();
+                  }, 400);
+                } else {
+                  this.setState({ selectionError: true });
+                }
+              }}
+            >
+              ADD TO CART
+            </Button>
+          ) : (
+            <Button className={classes.Btn} disabled={!product.inStock}>
+              Out of stock
+            </Button>
+          )}
 
-          <Button
-            onClick={() => {
-              if (product.attributes.length === selectedAttributes.length) {
-                addItemToCart({
-                  ...product,
-                  selectedAttributes,
-                  inCartId: product.name + selectedAttributes.map((attr) => attr.value).join(),
-                });
-                this.setState({ selectionError: false });
-                animateCart();
-                setTimeout(() => {
-                  hideAnimateCart();
-                }, 400);
-              } else {
-                this.setState({ selectionError: true });
-              }
-            }}
-            style={{
-              width: '100%',
-            }}
-          >
-            ADD TO CART
-          </Button>
           {selectionError && (
             <p className={classes.Warning}>
               You Have to select one of each Attributes

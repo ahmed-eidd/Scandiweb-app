@@ -72,7 +72,7 @@ export class MiniCart extends Component {
             <div className={classes.ImgAndAmountBtns}>
               <div className={classes.AmountBtns}>
                 <Button sqMini type="square" onClick={() => increaseItem(item)}>
-                  +
+                  <i className="fas fa-plus"></i>
                 </Button>
                 <p>{item.count}</p>
                 <Button
@@ -82,7 +82,7 @@ export class MiniCart extends Component {
                     item.count > 1 ? descreaseItem(item) : removeItem(item);
                   }}
                 >
-                  -
+                  <i className="fas fa-minus"></i>
                 </Button>
               </div>
               <div className={classes.ItemImg}>
