@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './Card.module.css';
 // import Img from '../../test.png';
 import CartIcon from '../Icons/CartIcon';
@@ -12,7 +12,7 @@ import {
   HideAnimateCart,
 } from '../../store/cart/actions';
 
-export class Card extends Component {
+export class Card extends PureComponent {
   onCartAnimation = () => {
     this.props.animateCart();
     setTimeout(() => {
@@ -54,14 +54,10 @@ export class Card extends Component {
         className={
           !disabled ? classes.Card : [classes.Card, classes.Disabled].join(' ')
         }
- 
       >
         <Link
-          style={{
-            position: 'absolute',
-            width: '100%',
-            height: '100%',
-          }}
+        className={classes.Link}
+      
           to={`/product/${id}`}
         />
         {disabled && <h2 className={classes.OutOfStockTitle}>Out of Stock</h2>}

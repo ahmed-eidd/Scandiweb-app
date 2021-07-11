@@ -35,7 +35,7 @@ export class CartPage extends Component {
     console.log(galleryImgIndex);
     return (
       <div>
-        <h1 style={{ marginBottom: '3rem', textTransform: 'uppercase' }}>
+        <h1 className={classes.MainTitle}>
           Cart
         </h1>
         {cart.map((item, i) => (
@@ -76,13 +76,6 @@ export class CartPage extends Component {
                   <i className='fas fa-minus'></i>
                 </Button>
               </div>
-              {/* <div className={classes.ItemImg}>
-                <div className={classes.ItemImgBtns}>
-                  <i className='fas fa-chevron-left'></i>
-                  <i className='fas fa-chevron-right' onClick={() => this.galleryNextImgHandler(item.gallery)}></i>
-                </div>
-                <img src={item.gallery[galleryImgIndex]} alt='' />
-              </div> */}
               <ItemGallery gallery={item.gallery} />
             </div>
           </div>

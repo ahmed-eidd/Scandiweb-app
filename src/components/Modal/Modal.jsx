@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './Modal.module.css';
 
-export class Modal extends Component {
+export class Modal extends PureComponent {
   render() {
     const { children, style, top, left, right, bottom, className, open } =
       this.props;

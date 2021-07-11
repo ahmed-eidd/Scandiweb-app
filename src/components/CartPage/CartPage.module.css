@@ -36,6 +36,11 @@
   height: 100%;
 }
 
+.MainTitle {
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+}
+
 .Title,
 .Price,
 .Attributes {
@@ -85,8 +90,6 @@
   font-size: 1.6rem;
   font-weight: 600;
 }
-
-
 
 .Total {
   display: flex;

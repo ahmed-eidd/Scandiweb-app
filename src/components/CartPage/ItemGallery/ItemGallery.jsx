@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './ItemGallery.module.css';
 
-export class ItemGallery extends Component {
+export class ItemGallery extends PureComponent {
   state = {
     galleryImgIndex: 0,
   };

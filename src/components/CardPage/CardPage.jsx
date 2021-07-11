@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Button from '../Button/Button';
 import classes from './CardPage.module.css';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ import {
   HideAnimateCart,
 } from '../../store/cart/actions';
 
-export class CardPage extends Component {
+export class CardPage extends PureComponent {
   state = {
     currentImg: null,
     selectedAttributes: [],
@@ -31,7 +31,7 @@ export class CardPage extends Component {
       // if has children map and return them
       if (item.children.length > 0) {
         const itemsArr = [...item.children];
-        const children = itemsArr.map((el) => ifHasChilds(el));
+        const children = itemsArr.map((el, index) => ifHasChilds(el,index));
 
         return React.createElement(item.localName, { key: index }, children);
       } else {
