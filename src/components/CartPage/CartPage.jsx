@@ -8,6 +8,7 @@ import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 export class CartPage extends Component {
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
+    console.log(itemCount);
     return (
       itemCount * getCurrentPrice(item.prices, this.props.currency)
     ).toFixed(2);
@@ -19,6 +20,7 @@ export class CartPage extends Component {
       removeItem,
       cart,
       currSymbol,
+      currency,
     } = this.props;
 
     return (
@@ -31,18 +33,18 @@ export class CartPage extends Component {
             <div className={classes.ItemTitleAndPrice}>
               <p className={classes.Title}>{item.name}</p>
               <p className={classes.Price}>
-                {currSymbol + ' ' + this.calEachItem(item)}{' '}
+                {getCurrentPrice(item.prices, currency) + ' ' + currSymbol}
               </p>
               <div className={classes.Attributes}>
                 {item.selectedAttributes?.map((el, i) =>
                   el.attr === 'Color' ? (
                     <Button
                       key={i}
-                      type="square"
+                      type='square'
                       style={{ backgroundColor: el.value }}
                     ></Button>
                   ) : (
-                    <Button key={i} type="square">
+                    <Button key={i} type='square'>
                       {el.value}
                     </Button>
                   )
@@ -51,21 +53,21 @@ export class CartPage extends Component {
             </div>
             <div className={classes.ImgAndAmountBtns}>
               <div className={classes.AmountBtns}>
-                <Button type="square" onClick={() => increaseItem(item)}>
-                  +
+                <Button type='square' onClick={() => increaseItem(item)}>
+                  <i className='fas fa-plus'></i>
                 </Button>
                 <p>{item.count}</p>
                 <Button
-                  type="square"
+                  type='square'
                   onClick={() => {
                     item.count > 1 ? descreaseItem(item) : removeItem(item);
                   }}
                 >
-                  -
+                  <i className='fas fa-minus'></i>
                 </Button>
               </div>
               <div className={classes.ItemImg}>
-                <img src={item.gallery[0]} alt="" />
+                <img src={item.gallery[0]} alt='' />
               </div>
             </div>
           </div>
@@ -79,6 +81,7 @@ export class CartPage extends Component {
 const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   currSymbol: state.currency.symbol,
+  currency: state.currency.currency,
 });
 
 const mapDispatchToProps = {

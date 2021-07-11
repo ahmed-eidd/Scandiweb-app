@@ -50,7 +50,7 @@ export class MiniCart extends Component {
             <div className={classes.ItemTitleAndPrice}>
               <p className={classes.Title}>{item.name}</p>
               <p className={classes.Price}>
-                {this.calEachItem(item) + ' ' + currency}{' '}
+                {getCurrentPrice(item.prices, currency) + ' ' + currency}{' '}
               </p>
               <div className={classes.Attributes}>
                 {item.selectedAttributes?.map((el,i) =>
@@ -82,6 +82,7 @@ export class MiniCart extends Component {
                     item.count > 1 ? descreaseItem(item) : removeItem(item);
                   }}
                 >
+                  
                   <i className="fas fa-minus"></i>
                 </Button>
               </div>
