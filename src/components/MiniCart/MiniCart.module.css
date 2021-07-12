@@ -1,7 +1,11 @@
 .MiniCart {
   min-width: 38.5rem;
   padding: 2rem;
+  min-height: 21rem;
+  max-height: 40rem;
+  overflow-y: scroll;
 }
+
 
 .MiniCartTitle {
   margin-bottom: 2rem;
@@ -16,8 +20,6 @@
   align-items: flex-start;
   position: relative;
 }
-
-
 
 .ItemTitleAndPrice {
   display: flex;

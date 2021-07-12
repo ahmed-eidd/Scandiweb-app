@@ -45,39 +45,44 @@ export class MiniCart extends PureComponent {
         <h2 className={classes.MiniCartTitle}>
           My Bag, <span>{count} items</span>
         </h2>
-        {cart.map((item, i) => (
-          <div className={classes.Item} key={i}>
-            <div className={classes.ItemTitleAndPrice}>
-              <p className={classes.Title}>{item.name}</p>
-              <p className={classes.Price}>
-                {currSymbol + ' ' + getCurrentPrice(item.prices, currency)}{' '}
-              </p>
+        <div className={classes.Content}>
+          {cart.map((item, i) => (
+            <div className={classes.Item} key={i}>
+              <div className={classes.ItemTitleAndPrice}>
+                <p className={classes.Title}>{item.name}</p>
+                <p className={classes.Price}>
+                  {currSymbol + ' ' + getCurrentPrice(item.prices, currency)}{' '}
+                </p>
 
-              <MiniCartAttr attributes={item.selectedAttributes} />
-            </div>
-            <div className={classes.ImgAndAmountBtns}>
-              <div className={classes.AmountBtns}>
-                <Button sqMini type='square' onClick={() => increaseItem(item)}>
-                  <i className='fas fa-plus'></i>
-                </Button>
-                <p>{item.count}</p>
-                <Button
-                  sqMini
-                  type='square'
-                  onClick={() => {
-                    item.count > 1 ? descreaseItem(item) : removeItem(item);
-                  }}
-                >
-                  <i className='fas fa-minus'></i>
-                </Button>
+                <MiniCartAttr attributes={item.selectedAttributes} />
               </div>
-              <div className={classes.ItemImg}>
-                <img src={item.gallery[0]} alt='' />
+              <div className={classes.ImgAndAmountBtns}>
+                <div className={classes.AmountBtns}>
+                  <Button
+                    sqMini
+                    type='square'
+                    onClick={() => increaseItem(item)}
+                  >
+                    <i className='fas fa-plus'></i>
+                  </Button>
+                  <p>{item.count}</p>
+                  <Button
+                    sqMini
+                    type='square'
+                    onClick={() => {
+                      item.count > 1 ? descreaseItem(item) : removeItem(item);
+                    }}
+                  >
+                    <i className='fas fa-minus'></i>
+                  </Button>
+                </div>
+                <div className={classes.ItemImg}>
+                  <img src={item.gallery[0]} alt='' />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-
+          ))}
+        </div>
         <div className={classes.Total}>
           <p className={classes.TotalText}>total</p>
           <p className={classes.TotalNumber}>

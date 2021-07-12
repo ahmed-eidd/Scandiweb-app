@@ -2,11 +2,30 @@
   --color-primary: #5ece7b;
   --color-dark: #1d1f22;
   --color-light: #ffffff;
-  --color-grey: #A6A6A6;
+  --color-grey: #a6a6a6;
   --color-grey-dark: #808080;
   --font-primary: 'Raleway', sans-serif;
   --shadow: 0px 2px 5px #0000001f;
   --shadow-lighter: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--color-light);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grey-dark);
 }
 
 html,
