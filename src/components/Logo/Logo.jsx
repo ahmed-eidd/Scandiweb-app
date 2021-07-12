@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-export class Logo extends Component {
+export class Logo extends PureComponent {
   render() {
     return (
       <svg

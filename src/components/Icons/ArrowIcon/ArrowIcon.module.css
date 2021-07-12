@@ -1,0 +1,8 @@
+.ArrowIcon {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease-in-out;
+}
+
+.Animate {
+  transform: rotate(0deg);
+}

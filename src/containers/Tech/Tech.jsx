@@ -4,14 +4,17 @@ import CardList from '../../components/CardList/CardList';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 import { Query } from '@apollo/client/react/components';
-import { GET_PRODUCTS } from '../../graphql/Queries';
+import { GET_PRODUCTS_BY_CATEGORY } from '../../graphql/Queries';
 import Spinner from '../../components/Spinner/Spinner';
 export class Tech extends Component {
   render() {
     const { currency, symbol } = this.props;
     return (
       <CardList>
-        <Query query={GET_PRODUCTS} variables={{ category: 'tech' }}>
+        <Query
+          query={GET_PRODUCTS_BY_CATEGORY}
+          variables={{ category: 'tech' }}
+        >
           {({ loading, data }) =>
             loading ? (
               <Spinner />

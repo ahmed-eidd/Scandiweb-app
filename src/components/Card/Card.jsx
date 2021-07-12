@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import classes from './Card.module.css';
 // import Img from '../../test.png';
-import CartIcon from '../Icons/CartIcon';
+import CartIcon from '../Icons/CartIcon/CartIcon';
 import { Link } from 'react-router-dom';
 import { isInCart } from '../../utilities/isInCart';
 import { connect } from 'react-redux';

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import CartIcon from './NavIcons/NavCart/NavCart';
 import DollarIcon from './NavIcons/NavCurr/NavCurr';
 import Logo from '../Logo/Logo';
@@ -9,7 +9,7 @@ import { GET_CURRENCIES } from '../../graphql/Queries';
 import { connect } from 'react-redux';
 import { cartModalAction, currModalAction } from '../../store/modals/actions';
 
-export class Nav extends Component {
+export class Nav extends PureComponent {
   render() {
     return (
       <Query query={GET_CURRENCIES}>

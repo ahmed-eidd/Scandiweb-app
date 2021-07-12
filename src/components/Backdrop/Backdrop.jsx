@@ -7,19 +7,15 @@ export class Backdrop extends Component {
     return (
       <div
         onClick={onClick}
-        style={{
-          opacity: open ? 1 : 0,
-          pointerEvents: open ? 'auto' : 'none',
-        }}
-        className={classes.Container}
+        className={
+          open ? [classes.Container, classes.Open].join(' ') : classes.Container
+        }
       >
-        <div className={classes.Outsidedrop} ></div>
+        <div className={classes.Outsidedrop}></div>
         <div className={classes.Backdrop}></div>
       </div>
     );
   }
 }
-
-
 
 export default Backdrop;

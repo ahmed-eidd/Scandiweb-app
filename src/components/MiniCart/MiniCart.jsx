@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import classes from './MiniCart.module.css';
@@ -7,10 +7,12 @@ import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 import { addMoreItem, addLessItem, deleteItem } from '../../store/cart/actions';
 import { cartModalAction } from '../../store/modals/actions';
 
-export class MiniCart extends Component {
+export class MiniCart extends PureComponent {
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
-    return (itemCount * getCurrentPrice(item.prices, this.props.currency)).toFixed(2);
+    return (
+      itemCount * getCurrentPrice(item.prices, this.props.currency)
+    ).toFixed(2);
   };
 
   calTotal = (cart) => {
@@ -34,9 +36,10 @@ export class MiniCart extends Component {
       descreaseItem,
       removeItem,
       cartModalHandler,
+      currSymbol,
     } = this.props;
     return (
-      <Modal open={open} top="150%" className={classes.MiniCart}>
+      <Modal open={open} top='150%' className={classes.MiniCart}>
         <h2>
           My Bag, <span>{count} items</span>
         </h2>
@@ -45,19 +48,19 @@ export class MiniCart extends Component {
             <div className={classes.ItemTitleAndPrice}>
               <p className={classes.Title}>{item.name}</p>
               <p className={classes.Price}>
-                {getCurrentPrice(item.prices, currency) + ' ' + currency}{' '}
+                {currSymbol + ' ' + getCurrentPrice(item.prices, currency)}{' '}
               </p>
               <div className={classes.Attributes}>
-                {item.selectedAttributes?.map((el,i) =>
+                {item.selectedAttributes?.map((el, i) =>
                   el.attr === 'Color' ? (
                     <Button
-                    key={i}
-                      type="square"
+                      key={i}
+                      type='square'
                       style={{ backgroundColor: el.value }}
                       sqMini
                     ></Button>
                   ) : (
-                    <Button key={i} type="square" sqMini>
+                    <Button key={i} type='square' sqMini>
                       {el.value}
                     </Button>
                   )
@@ -66,23 +69,22 @@ export class MiniCart extends Component {
             </div>
             <div className={classes.ImgAndAmountBtns}>
               <div className={classes.AmountBtns}>
-                <Button sqMini type="square" onClick={() => increaseItem(item)}>
-                  <i className="fas fa-plus"></i>
+                <Button sqMini type='square' onClick={() => increaseItem(item)}>
+                  <i className='fas fa-plus'></i>
                 </Button>
                 <p>{item.count}</p>
                 <Button
                   sqMini
-                  type="square"
+                  type='square'
                   onClick={() => {
                     item.count > 1 ? descreaseItem(item) : removeItem(item);
                   }}
                 >
-                  
-                  <i className="fas fa-minus"></i>
+                  <i className='fas fa-minus'></i>
                 </Button>
               </div>
               <div className={classes.ItemImg}>
-                <img src={item.gallery[0]} alt="" />
+                <img src={item.gallery[0]} alt='' />
               </div>
             </div>
           </div>
@@ -91,14 +93,14 @@ export class MiniCart extends Component {
         <div className={classes.Total}>
           <p className={classes.TotalText}>total</p>
           <p className={classes.TotalNumber}>
-            {this.calTotal(cart) + ' ' + currency}
+            { currSymbol + ' ' + this.calTotal(cart) }
           </p>
         </div>
         <div className={classes.ActionBtns}>
           <Button
-            type="link"
-            to="/mycart"
-            variant="outline"
+            type='link'
+            to='/mycart'
+            variant='outline'
             onClick={cartModalHandler}
           >
             View Bag
@@ -114,6 +116,7 @@ const mapStateToProps = (state) => ({
   cart: state.cart.cart,
   count: state.cart.count,
   currency: state.currency.currency,
+  currSymbol: state.currency.symbol,
 });
 
 const mapDispatchToProps = {

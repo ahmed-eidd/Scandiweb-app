@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import classes from './CartIcon.module.css';
 
 export class CartIcon extends Component {
   render() {
     const {className, height = 20, width = 20, style, color, onClick} = this.props
     return (
       <svg
-        className={className}
-        style={{cursor: 'pointer',...style}}
+        className={[classes.CartIcon,className].join(' ')}
+        style={style}
         width={width}
         height={height}
         viewBox="0 0 20 20"

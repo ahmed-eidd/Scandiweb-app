@@ -14,7 +14,7 @@ export class CartPage extends Component {
 
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
-    console.log(itemCount);
+   
     return (
       itemCount * getCurrentPrice(item.prices, this.props.currency)
     ).toFixed(2);
@@ -31,8 +31,6 @@ export class CartPage extends Component {
       currency,
     } = this.props;
 
-    const { galleryImgIndex } = this.state;
-    console.log(galleryImgIndex);
     return (
       <div>
         <h1 className={classes.MainTitle}>

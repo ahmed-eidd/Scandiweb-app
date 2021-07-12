@@ -89,7 +89,7 @@ export class CardPage extends PureComponent {
     } = this.props;
     const { currentImg, selectedAttributes, selectionError } = this.state;
 
-    console.log(selectedAttributes);
+  
     return (
       <div className={classes.CardPage}>
         <div className={classes.Gallery}>
@@ -165,7 +165,7 @@ export class CardPage extends PureComponent {
                           })
                         }
                       >
-                        {console.log()}
+                  
                         {item.value}
                       </Button>
                     );

@@ -4,7 +4,7 @@ import CardList from '../../components/CardList/CardList';
 import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 import { Query } from '@apollo/client/react/components';
-import { GET_PRODUCTS } from '../../graphql/Queries';
+import { GET_PRODUCTS_BY_CATEGORY } from '../../graphql/Queries';
 import Spinner from '../../components/Spinner/Spinner';
 
 export class Clothes extends Component {
@@ -13,7 +13,7 @@ export class Clothes extends Component {
     return (
       <CardList>
         <Query
-          query={GET_PRODUCTS}
+          query={GET_PRODUCTS_BY_CATEGORY}
           variables={{
             category: 'clothes',
           }}

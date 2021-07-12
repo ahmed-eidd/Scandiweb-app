@@ -1,3 +1,29 @@
+.NavCart {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0.5rem;
+  padding: 0.5rem 0.5rem;
+}
+
+.NavCartCount {
+  cursor: pointer;
+  position: absolute;
+  color: var(--color-light);
+  background-color: var(--color-dark);
+  font-size: 14px;
+  padding: 0.6rem;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -6px;
+  left: 17px;
+}
+
 .MiniCart {
   position: absolute;
 }

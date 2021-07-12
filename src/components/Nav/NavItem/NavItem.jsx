@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {NavLink as Link} from 'react-router-dom';
 import classes from './NavItem.module.css';
 
-export class NavItem extends Component {
+export class NavItem extends PureComponent {
 
   render() {
     const {children, to} = this.props

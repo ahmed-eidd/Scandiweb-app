@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './NavCurr.module.css';
 import { connect } from 'react-redux';
 import { currModalAction } from '../../../../store/modals/actions';
 import Modal from '../../../Modal/Modal';
 import Backdrop from '../../../Backdrop/Backdrop';
-import ArrowIcon from '../../../Icons/ArrowIcon';
+import ArrowIcon from '../../../Icons/ArrowIcon/ArrowIcon';
 import { changeCurrency } from '../../../../store/currency/actions';
 
-export class NavCurr extends Component {
+export class NavCurr extends PureComponent {
   onCurrHandler = (curr) => {
     this.props.currChange(curr);
     this.props.currHandler();
