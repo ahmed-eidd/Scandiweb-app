@@ -29,8 +29,6 @@ export class MiniCartAttr extends Component {
   };
 
   render() {
-    console.log(this.state.hasAttrWithLabel);
-    console.log('attr', this.props.attributes);
     const { attributes } = this.props;
     const { hasAttrWithLabel } = this.state;
 

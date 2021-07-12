@@ -43,7 +43,7 @@ export class MiniCart extends PureComponent {
       cartModalHandler,
       currSymbol,
     } = this.props;
-    console.log(this.state.hasAttrWithLabel);
+
 
     const attrWithLabel = (el, i) => {
       if (el.value === 'Yes' || el.value === 'No') {
