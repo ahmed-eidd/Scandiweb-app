@@ -5,9 +5,6 @@ import ProductPage from './containers/ProductPage/ProductPage';
 import Home from './containers/Home/Home.jsx';
 import Tech from './containers/Tech/Tech';
 import Clothes from './containers/Clothes/Clothes';
-import Spinner from './components/Spinner/Spinner';
-import { Query } from '@apollo/client/react/components';
-import { GET_PRODUCTS } from './graphql/Queries';
 import { connect } from 'react-redux';
 import CartPage from './components/CartPage/CartPage';
 export class App extends Component {
@@ -19,59 +16,11 @@ export class App extends Component {
     return (
       <Layout>
         <Switch>
-          <Query query={GET_PRODUCTS}>
-            {({ data, loading }) => (
-              <>
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <>
-                    <Route
-                      path="/"
-                      exact
-                      render={() => (
-                        <Home products={data?.category?.products} />
-                      )}
-                    />
-                    <Route
-                      path="/clothes"
-                      exact
-                      render={() => (
-                        <Clothes
-                       
-                          products={this.filterData(
-                            data?.category?.products,
-                            'clothes'
-                          )}
-                        />
-                      )}
-                    />
-                    <Route
-                      path="/tech"
-                      exact
-                      render={() => (
-                        <Tech
-                          products={this.filterData(
-                            data?.category?.products,
-                            'tech'
-                          )}
-                        />
-                      )}
-                    />
-
-                    <Route
-                      path="/product/:id"
-                      exact
-                      render={() => (
-                        <ProductPage products={data?.category?.products} />
-                      )}
-                    />
-                  <Route path="/mycart" exact component={CartPage} />
-                  </>
-                )}
-              </>
-            )}
-          </Query>
+          <Route path='/' exact component={Home} />
+          <Route path='/clothes' exact component={Clothes} />
+          <Route path='/tech' exact component={Tech} />
+          <Route path='/product/:id' exact component={ProductPage} />
+          <Route path='/mycart' exact component={CartPage} />
         </Switch>
       </Layout>
     );
