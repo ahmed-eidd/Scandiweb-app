@@ -2,7 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, 39rem);
-  grid-gap: 2rem;
+  grid-gap: 4rem;
   justify-content: space-between;
 }
 

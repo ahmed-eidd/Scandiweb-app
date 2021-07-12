@@ -8,14 +8,17 @@ export class Modal extends PureComponent {
     return (
       <div
         style={{
-          display: open ? 'block' : 'none',
           top: top,
           bottom: bottom,
           left: left,
           right: right,
           ...style,
         }}
-        className={[classes.Modal, className].join(' ')}
+        className={
+          open
+            ? [classes.Modal, classes.ModalOpen, className].join(' ')
+            : [classes.Modal, className].join(' ')
+        }
       >
         {children}
       </div>

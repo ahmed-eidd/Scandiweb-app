@@ -7,6 +7,7 @@ import Tech from './containers/Tech/Tech';
 import Clothes from './containers/Clothes/Clothes';
 import { connect } from 'react-redux';
 import CartPage from './components/CartPage/CartPage';
+
 export class App extends Component {
   filterData = (data, filter) => {
     return data?.filter((item) => item.category === filter);
