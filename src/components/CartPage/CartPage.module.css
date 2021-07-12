@@ -1,5 +1,5 @@
 .Item {
-  height: 22rem;
+  height: 26rem;
   padding: 2rem 0;
   width: 100%;
   margin-bottom: 2rem;
@@ -37,14 +37,14 @@
 }
 
 .MainTitle {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   text-transform: uppercase;
 }
 
 .Title,
 .Price,
 .Attributes {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .Title {

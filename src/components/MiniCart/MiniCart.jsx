@@ -6,8 +6,13 @@ import { connect } from 'react-redux';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 import { addMoreItem, addLessItem, deleteItem } from '../../store/cart/actions';
 import { cartModalAction } from '../../store/modals/actions';
+import MiniCartAttr from './MiniCartAttr/MiniCartAttr';
 
 export class MiniCart extends PureComponent {
+  state = {
+    hasAttrWithLabel: this.props?.cart?.selectedAttributes,
+  };
+
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
     return (
@@ -38,6 +43,27 @@ export class MiniCart extends PureComponent {
       cartModalHandler,
       currSymbol,
     } = this.props;
+    console.log(this.state.hasAttrWithLabel);
+
+    const attrWithLabel = (el, i) => {
+      if (el.value === 'Yes' || el.value === 'No') {
+        return (
+          <div key={i}>
+            <p>{el.attr} : </p>{' '}
+            <Button type='square' sqMini>
+              {el.value}
+            </Button>
+          </div>
+        );
+      } else {
+        return (
+          <Button key={i} type='square' sqMini>
+            {el.value}
+          </Button>
+        );
+      }
+    };
+
     return (
       <Modal open={open} top='150%' className={classes.MiniCart}>
         <h2>
@@ -50,7 +76,9 @@ export class MiniCart extends PureComponent {
               <p className={classes.Price}>
                 {currSymbol + ' ' + getCurrentPrice(item.prices, currency)}{' '}
               </p>
-              <div className={classes.Attributes}>
+              
+                <MiniCartAttr attributes={item.selectedAttributes} />
+              {/* <div className={classes.Attributes}>
                 {item.selectedAttributes?.map((el, i) =>
                   el.attr === 'Color' ? (
                     <Button
@@ -60,12 +88,10 @@ export class MiniCart extends PureComponent {
                       sqMini
                     ></Button>
                   ) : (
-                    <Button key={i} type='square' sqMini>
-                      {el.value}
-                    </Button>
+                    attrWithLabel(el, i)
                   )
                 )}
-              </div>
+              </div> */}
             </div>
             <div className={classes.ImgAndAmountBtns}>
               <div className={classes.AmountBtns}>
@@ -93,7 +119,7 @@ export class MiniCart extends PureComponent {
         <div className={classes.Total}>
           <p className={classes.TotalText}>total</p>
           <p className={classes.TotalNumber}>
-            { currSymbol + ' ' + this.calTotal(cart) }
+            {currSymbol + ' ' + this.calTotal(cart)}
           </p>
         </div>
         <div className={classes.ActionBtns}>

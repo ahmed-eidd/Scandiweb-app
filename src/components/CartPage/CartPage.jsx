@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 import { addLessItem, addMoreItem, deleteItem } from '../../store/cart/actions';
 import { getCurrentPrice } from '../../utilities/getCurrentPrice';
 import ItemGallery from './ItemGallery/ItemGallery';
+import MiniCartAttr from '../MiniCart/MiniCartAttr/MiniCartAttr';
 
 export class CartPage extends Component {
   state = {
@@ -43,7 +44,8 @@ export class CartPage extends Component {
               <p className={classes.Price}>
                 {getCurrentPrice(item.prices, currency) + ' ' + currSymbol}
               </p>
-              <div className={classes.Attributes}>
+              <MiniCartAttr attributes={item.selectedAttributes} />
+              {/* <div className={classes.Attributes}>
                 {item.selectedAttributes?.map((el, i) =>
                   el.attr === 'Color' ? (
                     <Button
@@ -57,7 +59,7 @@ export class CartPage extends Component {
                     </Button>
                   )
                 )}
-              </div>
+              </div> */}
             </div>
             <div className={classes.ImgAndAmountBtns}>
               <div className={classes.AmountBtns}>
