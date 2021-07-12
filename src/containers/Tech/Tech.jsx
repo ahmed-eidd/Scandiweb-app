@@ -10,7 +10,7 @@ export class Tech extends Component {
   render() {
     const { currency, symbol } = this.props;
     return (
-      <CardList>
+      <CardList title='Tech'>
         <Query
           query={GET_PRODUCTS_BY_CATEGORY}
           variables={{ category: 'tech' }}

@@ -11,7 +11,7 @@ export class Clothes extends Component {
   render() {
     const { currency, symbol } = this.props;
     return (
-      <CardList>
+      <CardList title='Clothes'>
         <Query
           query={GET_PRODUCTS_BY_CATEGORY}
           variables={{

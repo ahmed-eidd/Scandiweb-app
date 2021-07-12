@@ -1,8 +1,13 @@
 .CardList {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, 41rem);
+  grid-template-columns: repeat(auto-fit, 39rem);
   grid-gap: 2rem;
-  justify-content: space-around;
-  justify-items: center;
+  justify-content: space-between;
+}
+
+.CardListTitle {
+  font-size: 4.2rem;
+  font-weight: 400;
+  margin-bottom: 3rem;
 }

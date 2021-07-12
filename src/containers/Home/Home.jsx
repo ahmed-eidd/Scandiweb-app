@@ -11,7 +11,7 @@ export class Home extends Component {
   render() {
     const { currency, symbol } = this.props;
     return (
-      <CardList>
+      <CardList title='All Categories'>
         <Query query={GET_ALL_PRODUCTS}>
           {({ loading, data }) =>
             loading ? (
