@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './ArrowIcon.module.css';
 
-export class ArrowIcon extends Component {
+export class ArrowIcon extends PureComponent {
   render() {
     const { open, className, width = 8, height = 4, style } = this.props;
     return (

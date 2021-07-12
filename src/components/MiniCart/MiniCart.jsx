@@ -9,10 +9,6 @@ import { cartModalAction } from '../../store/modals/actions';
 import MiniCartAttr from './MiniCartAttr/MiniCartAttr';
 
 export class MiniCart extends PureComponent {
-  state = {
-    hasAttrWithLabel: this.props?.cart?.selectedAttributes,
-  };
-
   calEachItem = (item) => {
     const itemCount = this.props.cart?.find((x) => x.name === item.name)?.count;
     return (
@@ -44,29 +40,9 @@ export class MiniCart extends PureComponent {
       currSymbol,
     } = this.props;
 
-
-    const attrWithLabel = (el, i) => {
-      if (el.value === 'Yes' || el.value === 'No') {
-        return (
-          <div key={i}>
-            <p>{el.attr} : </p>{' '}
-            <Button type='square' sqMini>
-              {el.value}
-            </Button>
-          </div>
-        );
-      } else {
-        return (
-          <Button key={i} type='square' sqMini>
-            {el.value}
-          </Button>
-        );
-      }
-    };
-
     return (
       <Modal open={open} top='150%' className={classes.MiniCart}>
-        <h2>
+        <h2 className={classes.MiniCartTitle}>
           My Bag, <span>{count} items</span>
         </h2>
         {cart.map((item, i) => (
@@ -76,22 +52,8 @@ export class MiniCart extends PureComponent {
               <p className={classes.Price}>
                 {currSymbol + ' ' + getCurrentPrice(item.prices, currency)}{' '}
               </p>
-              
-                <MiniCartAttr attributes={item.selectedAttributes} />
-              {/* <div className={classes.Attributes}>
-                {item.selectedAttributes?.map((el, i) =>
-                  el.attr === 'Color' ? (
-                    <Button
-                      key={i}
-                      type='square'
-                      style={{ backgroundColor: el.value }}
-                      sqMini
-                    ></Button>
-                  ) : (
-                    attrWithLabel(el, i)
-                  )
-                )}
-              </div> */}
+
+              <MiniCartAttr attributes={item.selectedAttributes} />
             </div>
             <div className={classes.ImgAndAmountBtns}>
               <div className={classes.AmountBtns}>

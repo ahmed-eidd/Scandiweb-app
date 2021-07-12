@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import NavItem from '../NavItem/NavItem'
 import classes from './NavItems.moduel.css';
 
-export class NavItems extends Component {
+export class NavItems extends PureComponent {
   render() {
     return (
       <ul className={classes.NavItems}>

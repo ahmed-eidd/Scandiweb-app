@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-export class DollarIcon extends Component {
+export class DollarIcon extends PureComponent {
   render() {
     const { className, width = 32, height = 30, style } = this.props;
     return (

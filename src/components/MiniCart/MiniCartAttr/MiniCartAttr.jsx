@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './MiniCartAttr.module.css';
 import Button from '../../Button/Button';
 
-export class MiniCartAttr extends Component {
+export class MiniCartAttr extends PureComponent {
   state = {
     hasAttrWithLabel: !!this.props.attributes.find(
       (x) => x.value === 'Yes' || x.value === 'No'

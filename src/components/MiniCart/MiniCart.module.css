@@ -3,15 +3,20 @@
   padding: 2rem;
 }
 
+.MiniCartTitle {
+  margin-bottom: 2rem;
+}
+
 .Item {
   height: 17.7rem;
   width: 100%;
-  margin: 2rem 0;
+  margin-bottom: 5rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   position: relative;
 }
+
 
 
 .ItemTitleAndPrice {
@@ -92,7 +97,6 @@
 }
 .TotalNumber {
   font-weight: 600;
-
 }
 
 .ActionBtns {

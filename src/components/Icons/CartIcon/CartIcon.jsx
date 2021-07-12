@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classes from './CartIcon.module.css';
 
-export class CartIcon extends Component {
+export class CartIcon extends PureComponent {
   render() {
     const {className, height = 20, width = 20, style, color, onClick} = this.props
     return (

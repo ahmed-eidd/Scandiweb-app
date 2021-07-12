@@ -1,7 +1,7 @@
+import React, { PureComponent } from 'react';
 import classes from './Backdrop.module.css';
-import React, { Component } from 'react';
 
-export class Backdrop extends Component {
+export class Backdrop extends PureComponent {
   render() {
     const { open, onClick } = this.props;
     return (
